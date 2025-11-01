@@ -20,12 +20,6 @@
             line-height: 1.6;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
         /* Landing Section */
         #landing {
             min-height: 100vh;
@@ -283,7 +277,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 2.2rem;
+            font-size: 2.5rem;
         }
 
         .card-front {
@@ -533,8 +527,8 @@
                 height: 70px;
             }
             
-            .card-back {
-                font-size: 1.8rem;
+            .card-front, .card-back {
+                font-size: 2rem;
             }
             
             .heart {
@@ -650,32 +644,36 @@
         
         // Create floating hearts with SVG - голд нь төвлөрүүлсэн
         function createHearts() {
-            const heartsCount = 15;
+            const heartsCount = 12;
             const heartSVG = `<svg viewBox="0 0 32 29.6" xmlns="http://www.w3.org/2000/svg">
                 <path d="M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2
                 c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z"/>
             </svg>`;
             
-            const colors = ['#ff4d6d', '#ff8fa3', '#ffb3c1', '#ffccff', '#ff6b8b', '#ff8eab'];
+            const colors = ['#ff4d6d', '#ff8fa3', '#ffb3c1', '#ffccff'];
+            
+            // Голд нь цуглуулсан зүрхсэн үүсгэх
+            const centerPositions = [
+                {x: 45, y: 45}, {x: 55, y: 45}, {x: 45, y: 55}, {x: 55, y: 55},
+                {x: 40, y: 50}, {x: 60, y: 50}, {x: 50, y: 40}, {x: 50, y: 60},
+                {x: 43, y: 43}, {x: 57, y: 43}, {x: 43, y: 57}, {x: 57, y: 57}
+            ];
             
             for (let i = 0; i < heartsCount; i++) {
                 const heart = document.createElement('div');
                 heart.classList.add('heart');
                 heart.innerHTML = heartSVG;
                 
-                // Голд нь төвлөрүүлсэн байршил - илүү жигд тархсан
-                const centerX = 50; // 50% - голд
-                const centerY = 50; // 50% - голд
-                
-                // Голд ойрхон байрлах санамсаргүй байршил
-                const x = centerX + (Math.random() - 0.5) * 40; // -20% to +20%
-                const y = centerY + (Math.random() - 0.5) * 30; // -15% to +15%
+                // Голд нь төвлөрсөн байршил
+                const pos = centerPositions[i];
+                const x = pos.x + (Math.random() - 0.5) * 10; // Бага зэрэг санамсаргүй байршил
+                const y = pos.y + (Math.random() - 0.5) * 10;
                 
                 // Random color
                 const color = colors[Math.floor(Math.random() * colors.length)];
                 
                 // Random animation delay and duration
-                const delay = Math.random() * 3;
+                const delay = Math.random() * 2;
                 const duration = Math.random() * 2 + 4;
                 
                 heart.style.left = `${x}%`;
@@ -740,8 +738,7 @@
                 
                 const cardBack = document.createElement('div');
                 cardBack.classList.add('card-back');
-                cardBack.textContent = symbol;
-                cardBack.style.fontSize = '2.5rem'; // emoji-г томруулсан
+                cardBack.textContent = symbol; // EMOJI нь энд байх ёстой!
                 
                 card.appendChild(cardFront);
                 card.appendChild(cardBack);
