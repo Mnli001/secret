@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birthday Surprise</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Playfair Display', serif;
+            background-color: #0a0a0a;
+            color: #d4af37;
+            overflow-x: hidden;
+            line-height: 1.6;
+            transition: background-color 1.5s ease;
+        }
+
+        body.sparkle-mode {
+            background: linear-gradient(45deg, #f78282, #eca3ca, #ffe3f1, #ff637a);
+            background-size: 400% 400%;
+            animation: gradientShift 8s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .sparkle {
+            position: fixed;
+            width: 8px;
+            height: 8px;
+            background-color: white;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 1000;
+            animation: sparkleAnim 1.5s ease-out forwards;
+        }
+
+        @keyframes sparkleAnim {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(180deg);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Landing Section */
+        #landing {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+            position: relative;
+        }
+
+        .surprise-btn {
+            background: linear-gradient(145deg, #d4af37, #b8941f);
+            color: #0a0a0a;
+            border: none;
+            padding: 20px 50px;
+            font-size: 2.5rem;
+            font-family: 'Great Vibes', cursive;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 10;
+        }
+
+        .surprise-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.8);
+        }
+
+        /* Content Section */
+        #content {
+            display: none;
+            padding: 40px 0;
+        }
+
+        .greeting {
+            text-align: center;
+            margin-bottom: 50px;
+            padding: 20px;
+        }
+
+        .greeting h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            font-family: 'Great Vibes', cursive;
+            color: #d4af37;
+        }
+
+        /* Media Section */
+        .media-section {
+            margin-bottom: 50px;
+        }
+
+        .video-container {
+            max-width: 800px;
+            margin: 0 auto 40px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            position: relative;
+        }
+
+        .video-container video {
+            width: 100%;
+            display: block;
+        }
+
+        .slider-container {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .slider {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .slide {
+            min-width: 100%;
+            height: 400px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .slider-nav {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .slider-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: rgba(212, 175, 55, 0.5);
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .slider-dot.active {
+            background-color: #d4af37;
+        }
+
+        .slider-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(212, 175, 55, 0.7);
+            color: #0a0a0a;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s;
+            z-index: 5;
+        }
+
+        .slider-arrow:hover {
+            background-color: #d4af37;
+        }
+
+        .slider-arrow.prev {
+            left: 15px;
+        }
+
+        .slider-arrow.next {
+            right: 15px;
+        }
+
+        /* Gift Button */
+        .gift-section {
+            text-align: center;
+            margin: 60px 0;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .gift-section.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .gift-btn {
+            background: linear-gradient(145deg, #d4af37, #b8941f);
+            color: #0a0a0a;
+            border: none;
+            padding: 18px 45px;
+            font-size: 1.8rem;
+            font-family: 'Great Vibes', cursive;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.7);
+            transition: all 0.3s ease;
+            position: relative;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 25px rgba(212, 175, 55, 0.7); }
+            50% { box-shadow: 0 0 35px rgba(212, 175, 55, 0.9); }
+            100% { box-shadow: 0 0 25px rgba(212, 175, 55, 0.7); }
+        }
+
+        .gift-btn:hover {
+            transform: scale(1.05);
+            animation: none;
+            box-shadow: 0 0 40px rgba(212, 175, 55, 1);
+        }
+
+        /* Popup Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: linear-gradient(145deg, #1a1a1a, #0f0f0f);
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.5);
+            border: 2px solid #d4af37;
+            position: relative;
+            animation: popIn 0.5s ease;
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0.5); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .modal h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #d4af37;
+            font-family: 'Great Vibes', cursive;
+        }
+
+        .modal p {
+            font-size: 1.5rem;
+            color: #f8f8f8;
+            line-height: 1.8;
+            margin-bottom: 25px;
+        }
+
+        .modal-close {
+            background-color: #c93030;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .modal-close:hover {
+            background-color: #a82525;
+            transform: scale(1.05);
+        }
+
+        .emoji {
+            font-size: 2rem;
+            margin: 0 5px;
+            animation: bounce 1.5s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Confetti */
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background-color: #d4af37;
+            opacity: 0.8;
+            z-index: 1000;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .surprise-btn {
+                font-size: 2rem;
+                padding: 15px 40px;
+            }
+
+            .greeting h1 {
+                font-size: 2.5rem;
+            }
+
+            .slide {
+                height: 300px;
+            }
+
+            .gift-btn {
+                font-size: 1.5rem;
+                padding: 15px 35px;
+            }
+
+            .modal h2 {
+                font-size: 2rem;
+            }
+
+            .modal p {
+                font-size: 1.2rem;
+            }
+
+            .slider-arrow {
+                width: 35px;
+                height: 35px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .surprise-btn {
+                font-size: 1.8rem;
+                padding: 12px 30px;
+            }
+
+            .greeting h1 {
+                font-size: 2rem;
+            }
+
+            .slide {
+                height: 250px;
+            }
+
+            .gift-btn {
+                font-size: 1.3rem;
+                padding: 12px 25px;
+            }
+
+            .modal h2 {
+                font-size: 1.8rem;
+            }
+
+            .modal p {
+                font-size: 1rem;
+            }
+
+            .modal-content {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Landing Section -->
+    <section id="landing">
+        <button class="surprise-btn">Surprise</button>
+    </section>
+
+    <!-- Content Section -->
+    <section id="content" class="container">
+        <!-- Greeting -->
+        <div class="greeting">
+            <h1>Happy Birthday My Love!</h1>
+            <p>You make every day magical. Today is all about celebrating you!</p>
+        </div>
+
+        <!-- Media Section -->
+        <div class="media-section">
+            <!-- Video Player -->
+            <div class="video-container">
+                <video id="birthdayVideo" controls autoplay muted>
+                    <source src="bichleg1.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+
+            <!-- Image Slider -->
+            <div class="slider-container">
+                <div class="slider">
+                    <div class="slide" style="background-image: url('zurag1.jpg');"></div>
+                    <div class="slide" style="background-image: url('zurag2.jpg');"></div>
+                    <div class="slide" style="background-image: url('zurag3.jpg');"></div>
+                </div>
+                <button class="slider-arrow prev">❮</button>
+                <button class="slider-arrow next">❯</button>
+                <div class="slider-nav">
+                    <div class="slider-dot active" data-index="0"></div>
+                    <div class="slider-dot" data-index="1"></div>
+                    <div class="slider-dot" data-index="2"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gift Button Section -->
+        <div class="gift-section" id="giftSection">
+            <button class="gift-btn">Your Special Gift</button>
+        </div>
+    </section>
+
+    <!-- Popup Modal -->
+    <div class="modal" id="giftModal">
+        <div class="modal-content">
+            <h2>Your Surprise Awaits!</h2>
+            <p>Today after class, grab an unforgettable gift from me <span class="emoji">hh</span> <span class="emoji">❤️</span> <span class="emoji">🎁</span> <span class="emoji">✨</span></p>
+            <button class="modal-close">Close</button>
+        </div>
+    </div>
+
+    <script>
+        // DOM Elements
+        const surpriseBtn = document.querySelector('.surprise-btn');
+        const landingSection = document.getElementById('landing');
+        const contentSection = document.getElementById('content');
+        const body = document.body;
+        const giftBtn = document.querySelector('.gift-btn');
+        const giftSection = document.getElementById('giftSection');
+        const giftModal = document.getElementById('giftModal');
+        const modalClose = document.querySelector('.modal-close');
+        const slider = document.querySelector('.slider');
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.slider-dot');
+        const prevArrow = document.querySelector('.slider-arrow.prev');
+        const nextArrow = document.querySelector('.slider-arrow.next');
+        const video = document.getElementById('birthdayVideo');
+
+        // Create sparkles
+        function createSparkles() {
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const sparkle = document.createElement('div');
+                    sparkle.className = 'sparkle';
+                    sparkle.style.left = Math.random() * 100 + 'vw';
+                    sparkle.style.top = Math.random() * 100 + 'vh';
+                    sparkle.style.animationDelay = Math.random() * 2 + 's';
+                    document.body.appendChild(sparkle);
+                    
+                    // Remove sparkle after animation
+                    setTimeout(() => {
+                        sparkle.remove();
+                    }, 2000);
+                }, i * 100);
+            }
+        }
+
+        // Confetti function
+        function createConfetti() {
+            const colors = ['#d4af37', '#c93030', '#ffffff', '#ff69b4'];
+            for (let i = 0; i < 150; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.top = -10 + 'px';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.width = Math.random() * 10 + 5 + 'px';
+                confetti.style.height = Math.random() * 10 + 5 + 'px';
+                confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+                document.body.appendChild(confetti);
+                
+                // Animate confetti
+                const animation = confetti.animate([
+                    { transform: `translateY(0) rotate(0deg)`, opacity: 1 },
+                    { transform: `translateY(${window.innerHeight}px) rotate(${Math.random() * 360}deg)`, opacity: 0 }
+                ], {
+                    duration: Math.random() * 3000 + 2000,
+                    easing: 'cubic-bezier(0.1, 0.8, 0.2, 1)'
+                });
+                
+                // Remove confetti after animation
+                animation.onfinish = () => confetti.remove();
+            }
+        }
+
+        // Reveal content on button click
+        surpriseBtn.addEventListener('click', () => {
+            // Create sparkles and change background
+            createSparkles();
+            body.classList.add('sparkle-mode');
+            
+            // Hide landing and show content
+            landingSection.style.display = 'none';
+            contentSection.style.display = 'block';
+            
+            // Scroll to top of content
+            window.scrollTo(0, 0);
+            
+            // Play video automatically
+            video.play();
+        });
+
+        // Gift button functionality
+        giftBtn.addEventListener('click', () => {
+            giftModal.style.display = 'flex';
+            createConfetti();
+        });
+
+        // Close modal
+        modalClose.addEventListener('click', () => {
+            giftModal.style.display = 'none';
+        });
+
+        // Close modal when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target === giftModal) {
+                giftModal.style.display = 'none';
+            }
+        });
+
+        // Photo slider functionality
+        let currentSlide = 0;
+        const slideCount = slides.length;
+        
+        // Update slider position
+        function updateSlider() {
+            slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+            
+            // Update active dot
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+        }
+        
+        // Auto-advance slides
+        setInterval(() => {
+            currentSlide = (currentSlide + 1) % slideCount;
+            updateSlider();
+        }, 5000);
+        
+        // Dot navigation
+        dots.forEach(dot => {
+            dot.addEventListener('click', () => {
+                currentSlide = parseInt(dot.getAttribute('data-index'));
+                updateSlider();
+            });
+        });
+        
+        // Arrow navigation
+        prevArrow.addEventListener('click', () => {
+            currentSlide = (currentSlide - 1 + slideCount) % slideCount;
+            updateSlider();
+        });
+        
+        nextArrow.addEventListener('click', () => {
+            currentSlide = (currentSlide + 1) % slideCount;
+            updateSlider();
+        });
+
+        // Video ended event - show gift button
+        video.addEventListener('ended', () => {
+            giftSection.classList.add('show');
+        });
+    </script>
+</body>
+</html>
