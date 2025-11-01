@@ -62,6 +62,63 @@
             }
         }
 
+        /* Emoji Images */
+        .emoji-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .emoji {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            animation: emojiFloat 15s infinite ease-in-out;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .emoji:nth-child(1) {
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .emoji:nth-child(2) {
+            top: 10%;
+            right: 10%;
+            animation-delay: 2s;
+        }
+
+        .emoji:nth-child(3) {
+            bottom: 10%;
+            left: 10%;
+            animation-delay: 4s;
+        }
+
+        .emoji:nth-child(4) {
+            bottom: 10%;
+            right: 10%;
+            animation-delay: 6s;
+        }
+
+        @keyframes emojiFloat {
+            0%, 100% { 
+                transform: translate(0, 0) rotate(0deg) scale(1);
+            }
+            25% { 
+                transform: translate(15px, -25px) rotate(8deg) scale(1.1);
+            }
+            50% { 
+                transform: translate(-10px, -15px) rotate(-5deg) scale(1.05);
+            }
+            75% { 
+                transform: translate(-15px, 10px) rotate(5deg) scale(1.1);
+            }
+        }
+
         /* Sections */
         section {
             min-height: 100vh;
@@ -81,6 +138,7 @@
         /* Landing Section */
         #landing {
             text-align: center;
+            position: relative;
         }
 
         .welcome-text h1 {
@@ -122,6 +180,8 @@
             transition: all 0.4s ease;
             box-shadow: 0 5px 20px rgba(255, 77, 109, 0.5);
             font-family: 'Playfair Display', serif;
+            z-index: 3;
+            position: relative;
         }
 
         .main-button:hover {
@@ -214,6 +274,26 @@
             font-size: 1.1rem;
         }
 
+        .start-game-button {
+            background: linear-gradient(45deg, #4CAF50, #45a049);
+            border: none;
+            border-radius: 50px;
+            padding: 15px 35px;
+            font-size: 1.2rem;
+            color: white;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
+            font-family: 'Playfair Display', serif;
+            margin: 0 auto 20px;
+            display: block;
+        }
+
+        .start-game-button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 20px rgba(76, 175, 80, 0.6);
+        }
+
         .memory-game {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -225,7 +305,7 @@
         .memory-card {
             width: 100%;
             height: 100px;
-            background: linear-gradient(135deg, #ff4d6d, #ff8fa3);
+            background: linear-gradient(135deg, #666, #888);
             border-radius: 12px;
             display: flex;
             justify-content: center;
@@ -256,7 +336,8 @@
         }
 
         .memory-card .front {
-            background: linear-gradient(135deg, #ff4d6d, #ff8fa3);
+            background: linear-gradient(135deg, #666, #888);
+            color: white;
         }
 
         .memory-card .back {
@@ -268,14 +349,6 @@
         .memory-card.matched {
             background: linear-gradient(135deg, #4CAF50, #45a049);
             cursor: default;
-        }
-
-        .game-stats {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
-            color: #e6ccff;
-            font-size: 1.1rem;
         }
 
         /* Celebration Section */
@@ -332,7 +405,7 @@
             }
         }
 
-        /* Video Container - ШИНЭЧЛЭГДСЭН */
+        /* Video Container */
         .video-section {
             width: 100%;
             max-width: 700px;
@@ -391,7 +464,7 @@
             margin-left: 8px;
         }
 
-        /* ШИНЭЧЛЭГДСЭН POPUP STYLE */
+        /* POPUP STYLE */
         .popup-overlay {
             position: fixed;
             top: 0;
@@ -506,6 +579,10 @@
                 width: 25px;
                 height: 25px;
             }
+            .emoji {
+                width: 60px;
+                height: 60px;
+            }
             .popup-letter {
                 padding: 25px;
                 max-width: 350px;
@@ -527,6 +604,10 @@
                 width: 20px;
                 height: 20px;
             }
+            .emoji {
+                width: 50px;
+                height: 50px;
+            }
             .popup-letter {
                 padding: 20px;
                 max-width: 300px;
@@ -547,6 +628,9 @@
 <body>
     <!-- Floating Hearts Background -->
     <div class="floating-hearts" id="floating-hearts"></div>
+
+    <!-- Emoji Images -->
+    <div class="emoji-container" id="emoji-container"></div>
 
     <!-- Landing Section -->
     <section id="landing">
@@ -571,15 +655,12 @@
         <div class="memory-game-container">
             <h2 class="game-title">Хайрын санах ойн тоглоом 💞</h2>
             <p class="game-instructions">Хоёр ижил зүрхний дүрсийг олж таарга! 🎯</p>
+            <button class="start-game-button" id="start-game-button">Тоглоом эхлүүлэх</button>
             <div class="memory-game" id="memory-game"></div>
-            <div class="game-stats">
-                <div>Оролдлого: <span id="attempts">0</span></div>
-                <div>Хэрэглэсэн хугацаа: <span id="timer">0</span> сек</div>
-            </div>
         </div>
     </section>
 
-    <!-- Celebration Section - ШИНЭЧЛЭГДСЭН -->
+    <!-- Celebration Section -->
     <section id="celebration" class="hidden">
         <div class="stars" id="celebration-stars"></div>
         <div class="celebration-content">
@@ -589,11 +670,11 @@
                 Энэ онцгой өдөр чинь зориулсан миний хайрын илэрхийлэл болон баяр хүргэлтийг хүлээн авна уу. ✨
             </p>
             
-            <!-- Video Section - ШИНЭЧЛЭГДСЭН -->
+            <!-- Video Section -->
             <div class="video-section">
                 <div class="video-container">
                     <video class="video-player" id="birthday-video">
-                        <source src="Bichleg1.mp4" type="video/mp4">
+                        <source src="bichleg1.mp4" type="video/mp4">
                         Таны хөтөч видео тоглуулах боломжгүй байна.
                     </video>
                     <div class="play-button" id="play-button"></div>
@@ -605,7 +686,7 @@
         </div>
     </section>
 
-    <!-- ШИНЭЧЛЭГДСЭН POPUP LETTER -->
+    <!-- POPUP LETTER -->
     <div class="popup-overlay" id="popup-overlay">
         <div class="popup-letter">
             <button class="close-button" id="close-button">✕</button>
@@ -631,11 +712,11 @@
         const celebrationSection = document.getElementById('celebration');
         const mainButton = document.getElementById('main-button');
         const floatingHearts = document.getElementById('floating-hearts');
+        const emojiContainer = document.getElementById('emoji-container');
         const starsContainer = document.getElementById('stars');
         const celebrationStars = document.getElementById('celebration-stars');
         const memoryGame = document.getElementById('memory-game');
-        const attemptsElement = document.getElementById('attempts');
-        const timerElement = document.getElementById('timer');
+        const startGameButton = document.getElementById('start-game-button');
         const video = document.getElementById('birthday-video');
         const playButton = document.getElementById('play-button');
         const specialGiftButton = document.getElementById('special-gift-button');
@@ -643,14 +724,12 @@
         const closeButton = document.getElementById('close-button');
         
         // Game Variables
-        let attempts = 0;
-        let timer = 0;
-        let timerInterval;
         let firstCard = null;
         let secondCard = null;
         let lockBoard = false;
         let matchedPairs = 0;
         const totalPairs = 8;
+        let gameStarted = false;
         
         const cardSymbols = ['❤️', '💖', '💕', '💗', '💓', '💞', '💘', '💝'];
 
@@ -682,6 +761,19 @@
                 
                 floatingHearts.appendChild(heart);
             }
+        }
+
+        // Create emoji images
+        function createEmojis() {
+            const emojiImages = ['emoji1.jpg', 'emoji2.jpg', 'emoji3.jpg', 'emoji4.jpg'];
+            
+            emojiImages.forEach((src, index) => {
+                const emoji = document.createElement('img');
+                emoji.className = 'emoji';
+                emoji.src = src;
+                emoji.alt = `Emoji ${index + 1}`;
+                emojiContainer.appendChild(emoji);
+            });
         }
 
         // Create stars
@@ -739,22 +831,14 @@
             });
 
             // Reset stats
-            attempts = 0;
-            timer = 0;
             matchedPairs = 0;
-            attemptsElement.textContent = '0';
-            timerElement.textContent = '0';
-            
-            clearInterval(timerInterval);
-            timerInterval = setInterval(() => {
-                timer++;
-                timerElement.textContent = timer;
-            }, 1000);
+            gameStarted = false;
+            startGameButton.style.display = 'block';
         }
 
         // Flip card
         function flipCard(card) {
-            if (lockBoard || card === firstCard || card.classList.contains('flipped')) return;
+            if (!gameStarted || lockBoard || card === firstCard || card.classList.contains('flipped')) return;
             
             card.classList.add('flipped');
             
@@ -764,8 +848,6 @@
             }
             
             secondCard = card;
-            attempts++;
-            attemptsElement.textContent = attempts;
             checkForMatch();
         }
 
@@ -789,7 +871,6 @@
             matchedPairs++;
             
             if (matchedPairs === totalPairs) {
-                clearInterval(timerInterval);
                 setTimeout(showCelebration, 1000);
             }
             
@@ -864,6 +945,23 @@
             createMemoryGame();
         });
 
+        startGameButton.addEventListener('click', function() {
+            gameStarted = true;
+            this.style.display = 'none';
+            
+            // Flip all cards briefly to show symbols
+            const cards = document.querySelectorAll('.memory-card');
+            cards.forEach(card => {
+                card.classList.add('flipped');
+            });
+            
+            setTimeout(() => {
+                cards.forEach(card => {
+                    card.classList.remove('flipped');
+                });
+            }, 2000);
+        });
+
         specialGiftButton.addEventListener('click', function() {
             popupOverlay.style.display = 'flex';
         });
@@ -887,6 +985,7 @@
 
         // Initialize
         createHearts();
+        createEmojis();
     </script>
 </body>
 </html>
