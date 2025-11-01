@@ -90,15 +90,8 @@
         }
 
         @keyframes glow {
-            from { 
-                text-shadow: 0 0 10px rgba(255, 204, 255, 0.7), 
-                           0 0 20px rgba(255, 153, 255, 0.5); 
-            }
-            to { 
-                text-shadow: 0 0 20px rgba(255, 204, 255, 0.9), 
-                           0 0 30px rgba(255, 153, 255, 0.7),
-                           0 0 40px rgba(255, 102, 178, 0.5); 
-            }
+            from { text-shadow: 0 0 10px rgba(255, 204, 255, 0.7); }
+            to { text-shadow: 0 0 20px rgba(255, 204, 255, 0.9); }
         }
 
         .welcome-text p {
@@ -106,7 +99,6 @@
             max-width: 600px;
             margin: 0 auto;
             color: #e6ccff;
-            text-shadow: 0 0 10px rgba(230, 204, 255, 0.5);
         }
 
         .main-button {
@@ -119,8 +111,6 @@
             cursor: pointer;
             transition: all 0.4s ease;
             box-shadow: 0 5px 20px rgba(255, 77, 109, 0.5);
-            position: relative;
-            overflow: hidden;
             z-index: 2;
             font-family: 'Playfair Display', serif;
             margin-top: 20px;
@@ -140,8 +130,6 @@
             align-items: center;
             padding: 40px 20px;
             position: relative;
-            opacity: 0;
-            transition: opacity 1s ease;
         }
 
         .stars {
@@ -175,9 +163,6 @@
             background-clip: text;
             color: transparent;
             animation: shimmer 3s ease infinite;
-            text-shadow: 0 0 15px rgba(255, 153, 204, 0.4);
-            position: relative;
-            z-index: 2;
         }
 
         @keyframes shimmer {
@@ -195,15 +180,12 @@
             backdrop-filter: blur(15px);
             border-radius: 20px;
             border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.2);
             font-size: 1.3rem;
             line-height: 1.8;
             color: #f0e6ff;
-            position: relative;
-            z-index: 2;
         }
 
-        /* Memory Game */
+        /* Memory Game - ШИНЭ ЭНГИЙН ХЭЛБЭР */
         .memory-game-container {
             width: 100%;
             max-width: 600px;
@@ -213,7 +195,6 @@
             backdrop-filter: blur(15px);
             border-radius: 20px;
             border: 1px solid rgba(255, 255, 255, 0.15);
-            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
             position: relative;
             z-index: 2;
         }
@@ -224,7 +205,6 @@
             text-align: center;
             margin-bottom: 20px;
             color: #ffccff;
-            text-shadow: 0 0 10px rgba(255, 204, 255, 0.5);
         }
 
         .game-instructions {
@@ -251,24 +231,18 @@
             justify-content: center;
             align-items: center;
             cursor: pointer;
-            transform-style: preserve-3d;
-            transition: transform 0.5s;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
             position: relative;
-            overflow: hidden;
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+            font-size: 2rem;
         }
 
         .memory-card.flipped {
             transform: rotateY(180deg);
         }
 
-        .memory-card.matched {
-            transform: rotateY(180deg);
-            cursor: default;
-            box-shadow: 0 0 20px rgba(255, 77, 109, 0.6);
-        }
-
-        .card-front, .card-back {
+        .memory-card .front,
+        .memory-card .back {
             position: absolute;
             width: 100%;
             height: 100%;
@@ -277,16 +251,21 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 2.5rem;
         }
 
-        .card-front {
+        .memory-card .front {
             background: linear-gradient(135deg, #ff4d6d, #ff8fa3);
         }
 
-        .card-back {
+        .memory-card .back {
             background: white;
+            color: #ff4d6d;
             transform: rotateY(180deg);
+        }
+
+        .memory-card.matched {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            cursor: default;
         }
 
         .game-stats {
@@ -297,7 +276,7 @@
             font-size: 1.1rem;
         }
 
-        /* Celebration Section */
+        /* Бусад хэсгүүд */
         #celebration {
             min-height: 100vh;
             display: none;
@@ -306,8 +285,6 @@
             align-items: center;
             padding: 40px 20px;
             position: relative;
-            opacity: 0;
-            transition: opacity 1s ease;
         }
 
         .celebration-content {
@@ -321,7 +298,6 @@
             font-size: 4rem;
             margin-bottom: 30px;
             color: #ffccff;
-            text-shadow: 0 0 25px rgba(255, 204, 255, 0.9);
             animation: pulse 1.5s infinite;
         }
 
@@ -335,7 +311,6 @@
             margin-bottom: 40px;
             color: #e6ccff;
             line-height: 1.8;
-            text-shadow: 0 0 10px rgba(230, 204, 255, 0.3);
         }
 
         .special-gift-button {
@@ -353,12 +328,6 @@
             display: none;
         }
 
-        .special-gift-button:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 10px 25px rgba(255, 77, 109, 0.7);
-        }
-
-        /* Video */
         .video-container {
             position: relative;
             width: 100%;
@@ -366,14 +335,11 @@
             margin: 30px auto;
             border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
         }
 
         .video-player {
             width: 100%;
             height: 400px;
-            object-fit: cover;
-            display: block;
             background: linear-gradient(135deg, #ff4d6d, #ff8fa3);
         }
 
@@ -383,7 +349,6 @@
             left: 50%;
             transform: translate(-50%, -50%);
             background: rgba(255, 77, 109, 0.9);
-            backdrop-filter: blur(10px);
             border-radius: 50%;
             width: 90px;
             height: 90px;
@@ -391,14 +356,7 @@
             justify-content: center;
             align-items: center;
             cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
             border: 2px solid rgba(255,255,255,0.3);
-        }
-
-        .play-button:hover {
-            background: rgba(255, 77, 109, 1);
-            transform: translate(-50%, -50%) scale(1.15);
         }
 
         .play-button::after {
@@ -411,7 +369,6 @@
             margin-left: 8px;
         }
 
-        /* Popup Letter */
         .popup-overlay {
             position: fixed;
             top: 0;
@@ -431,15 +388,7 @@
             padding: 50px;
             max-width: 550px;
             width: 90%;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
             position: relative;
-            animation: popIn 0.6s ease;
-            border: 2px solid #ff8fa3;
-        }
-
-        @keyframes popIn {
-            0% { transform: scale(0.8) translateY(20px); opacity: 0; }
-            100% { transform: scale(1) translateY(0); opacity: 1; }
         }
 
         .letter-content {
@@ -462,79 +411,22 @@
             font-size: 1.2rem;
             color: white;
             cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: all 0.3s ease;
         }
 
-        .close-button:hover {
-            background: #ff3357;
-            transform: scale(1.1);
-        }
-
-        /* Confetti */
-        .confetti {
-            position: absolute;
-            width: 12px;
-            height: 12px;
-            background-color: #f0f;
-            opacity: 0.8;
-            border-radius: 50%;
-            pointer-events: none;
-        }
-
-        /* Responsive */
         @media (max-width: 768px) {
-            .welcome-text h1, .headline {
-                font-size: 2.8rem;
-            }
-            
-            .celebration-title {
-                font-size: 3rem;
-            }
-            
-            .subtitle, .celebration-message {
-                font-size: 1.1rem;
-                padding: 20px;
-            }
-            
-            .main-button, .special-gift-button {
-                padding: 15px 35px;
-                font-size: 1.2rem;
-            }
-            
-            .memory-card {
-                height: 80px;
-            }
-            
-            .video-player {
-                height: 300px;
-            }
-            
-            .heart {
-                width: 35px;
-                height: 35px;
-            }
+            .welcome-text h1, .headline { font-size: 2.8rem; }
+            .celebration-title { font-size: 3rem; }
+            .subtitle, .celebration-message { font-size: 1.1rem; padding: 20px; }
+            .main-button, .special-gift-button { padding: 15px 35px; font-size: 1.2rem; }
+            .memory-card { height: 80px; font-size: 1.8rem; }
+            .video-player { height: 300px; }
+            .heart { width: 35px; height: 35px; }
         }
 
         @media (max-width: 480px) {
-            .memory-game {
-                grid-gap: 5px;
-            }
-            
-            .memory-card {
-                height: 70px;
-            }
-            
-            .card-front, .card-back {
-                font-size: 2rem;
-            }
-            
-            .heart {
-                width: 30px;
-                height: 30px;
-            }
+            .memory-game { grid-gap: 5px; }
+            .memory-card { height: 70px; font-size: 1.5rem; }
+            .heart { width: 30px; height: 30px; }
         }
     </style>
 </head>
@@ -563,9 +455,7 @@
         <div class="memory-game-container">
             <h2 class="game-title">Хайрын санах ойн тоглоом</h2>
             <p class="game-instructions">Хоёр ижил зүрхний дүрсийг олж таарга!</p>
-            <div class="memory-game" id="memory-game">
-                <!-- Cards will be generated by JavaScript -->
-            </div>
+            <div class="memory-game" id="memory-game"></div>
             <div class="game-stats">
                 <div>Оролдлого: <span id="attempts">0</span></div>
                 <div>Хэрэглэсэн хугацаа: <span id="timer">0</span> сек</div>
@@ -579,15 +469,12 @@
         <div class="celebration-content">
             <h1 class="celebration-title">Баяр хүргэе!</h1>
             <p class="celebration-message">
-                Та тоглоомыг амжилттай дуусгалаа! Миний хайртд зориулсан онцгой бэлэгт тавтай морил.<br>
-                Энэ онцгой өдөрт чинь зориулсан миний хайрын илэрхийлэл болон баяр хүргэлтийг хүлээн авна уу.
+                Та тоглоомыг амжилттай дуусгалаа! Миний хайртд зориулсан онцгой бэлэгт тавтай морил.
             </p>
             
-            <!-- Video -->
             <div class="video-container">
                 <video class="video-player" id="birthday-video">
                     <source src="Bichleg1.mp4" type="video/mp4">
-                    Таны хөтөч видео тоглуулах боломжгүй байна.
                 </video>
                 <div class="play-button" id="play-button"></div>
             </div>
@@ -602,407 +489,198 @@
             <button class="close-button" id="close-button">✕</button>
             <div class="letter-content">
                 Миний хайрт хүнд,<br><br>
-                Төрсөн өдрийн чинь мэнд хүргэе! Энэ онцгой өдөр чинь миний амьдралд гэрэл авьяас авчирсан шиг байна.<br><br>
-                Чи бол миний амьдралын хамгийн үнэт бэлэг, хамгийн сайхан зүйл юм. Чамтай байх болгонд сайхан, аз жаргалтай байдаг.<br><br>
-                Энэ өдөр чинь баяр баясгалангаар дүүрэн, бүх мөрөөдөл чинь биелэгдэж, хайр халамж чинь эргэн ирэхийг хүсье.<br><br>
-                Чамд үргэлж хайртай байх болно,<br>
-                Чиний хайрт
+                Төрсөн өдрийн чинь мэнд хүргэе! Энэ онцгой өдөр чинь миний амьдралд гэрэл авьяас авчирсан шиг байна.
             </div>
         </div>
     </div>
     
     <script>
-        // DOM Elements
-        const landingSection = document.getElementById('landing');
-        const nightSkySection = document.getElementById('night-sky');
-        const celebrationSection = document.getElementById('celebration');
-        const mainButton = document.getElementById('main-button');
-        const floatingHearts = document.getElementById('floating-hearts');
-        const starsContainer = document.getElementById('stars');
-        const celebrationStars = document.getElementById('celebration-stars');
-        const memoryGame = document.getElementById('memory-game');
-        const attemptsElement = document.getElementById('attempts');
-        const timerElement = document.getElementById('timer');
-        const video = document.getElementById('birthday-video');
-        const playButton = document.getElementById('play-button');
-        const specialGiftButton = document.getElementById('special-gift-button');
-        const popupOverlay = document.getElementById('popup-overlay');
-        const closeButton = document.getElementById('close-button');
-        
-        // Memory Game Variables
-        let attempts = 0;
-        let timer = 0;
-        let timerInterval;
-        let firstCard = null;
-        let secondCard = null;
-        let lockBoard = false;
-        let matchedPairs = 0;
-        const totalPairs = 8;
-        
-        // Card symbols (heart variations)
-        const cardSymbols = ['❤️', '💖', '💕', '💗', '💓', '💞', '💘', '💝'];
-        
-        // Create floating hearts with SVG - САНАМСАРГҮЙ БАЙРШИЛ
-        function createHearts() {
-            const heartsCount = 15;
-            const heartSVG = `<svg viewBox="0 0 32 29.6" xmlns="http://www.w3.org/2000/svg">
-                <path d="M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2
-                c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z"/>
-            </svg>`;
+        // ЭНГИЙН АЖИЛЛАХ ТОГЛООМЫН КОД
+        document.addEventListener('DOMContentLoaded', function() {
+            const landingSection = document.getElementById('landing');
+            const nightSkySection = document.getElementById('night-sky');
+            const celebrationSection = document.getElementById('celebration');
+            const mainButton = document.getElementById('main-button');
+            const memoryGame = document.getElementById('memory-game');
+            const attemptsElement = document.getElementById('attempts');
+            const timerElement = document.getElementById('timer');
+            const specialGiftButton = document.getElementById('special-gift-button');
+            const popupOverlay = document.getElementById('popup-overlay');
+            const closeButton = document.getElementById('close-button');
             
-            const colors = ['#ff4d6d', '#ff8fa3', '#ffb3c1', '#ffccff', '#ff6b8b', '#ff8eab'];
+            let attempts = 0;
+            let timer = 0;
+            let timerInterval;
+            let firstCard = null;
+            let secondCard = null;
+            let lockBoard = false;
+            let matchedPairs = 0;
+            const totalPairs = 8;
             
-            for (let i = 0; i < heartsCount; i++) {
-                const heart = document.createElement('div');
-                heart.classList.add('heart');
-                heart.innerHTML = heartSVG;
-                
-                // БҮР САНАМСАРГҮЙ БАЙРШИЛ
-                const x = Math.random() * 80 + 10; // 10% - 90% хооронд
-                const y = Math.random() * 80 + 10; // 10% - 90% хооронд
-                
-                // Random color
-                const color = colors[Math.floor(Math.random() * colors.length)];
-                
-                // Random animation delay and duration
-                const delay = Math.random() * 5;
-                const duration = Math.random() * 3 + 4;
-                
-                heart.style.left = `${x}%`;
-                heart.style.top = `${y}%`;
-                heart.style.animationDelay = `${delay}s`;
-                heart.style.animationDuration = `${duration}s`;
-                
-                // Set color
-                heart.querySelector('svg').style.fill = color;
-                
-                floatingHearts.appendChild(heart);
-            }
-        }
-        
-        // Create stars
-        function createStars(container) {
-            const starsCount = 150;
-            for (let i = 0; i < starsCount; i++) {
-                const star = document.createElement('div');
-                star.classList.add('star');
-                
-                // Random position
-                const x = Math.random() * 100;
-                const y = Math.random() * 100;
-                
-                // Random size
-                const size = Math.random() * 3 + 1;
-                
-                // Random animation delay
-                const delay = Math.random() * 3;
-                
-                star.style.left = `${x}%`;
-                star.style.top = `${y}%`;
-                star.style.width = `${size}px`;
-                star.style.height = `${size}px`;
-                star.style.animationDelay = `${delay}s`;
-                
-                container.appendChild(star);
-            }
-        }
-        
-        // ШИНЭ 4x4 САНАХ ОЙН ТОГЛООМЫН КОД
-        function createMemoryGame() {
-            // Clear existing cards
-            memoryGame.innerHTML = '';
+            const cardSymbols = ['❤️', '💖', '💕', '💗', '💓', '💞', '💘', '💝'];
             
-            // Create card pairs
-            const cards = [];
-            for (let i = 0; i < totalPairs; i++) {
-                cards.push(cardSymbols[i]);
-                cards.push(cardSymbols[i]);
+            // Зүрх үүсгэх
+            function createHearts() {
+                const heartsCount = 15;
+                const heartSVG = `<svg viewBox="0 0 32 29.6">
+                    <path d="M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z"/>
+                </svg>`;
+                
+                for (let i = 0; i < heartsCount; i++) {
+                    const heart = document.createElement('div');
+                    heart.className = 'heart';
+                    heart.innerHTML = heartSVG;
+                    heart.style.left = Math.random() * 80 + 10 + '%';
+                    heart.style.top = Math.random() * 80 + 10 + '%';
+                    heart.style.animationDelay = Math.random() * 5 + 's';
+                    document.getElementById('floating-hearts').appendChild(heart);
+                }
             }
             
-            // Shuffle cards
-            shuffleArray(cards);
-            
-            // Create card elements
-            cards.forEach((symbol, index) => {
-                const card = document.createElement('div');
-                card.className = 'memory-card';
-                card.dataset.symbol = symbol;
+            // Тоглоом үүсгэх
+            function createMemoryGame() {
+                memoryGame.innerHTML = '';
+                const cards = [];
                 
-                const cardFront = document.createElement('div');
-                cardFront.className = 'card-front';
+                // Хос карт үүсгэх
+                for (let i = 0; i < totalPairs; i++) {
+                    cards.push(cardSymbols[i]);
+                    cards.push(cardSymbols[i]);
+                }
                 
-                const cardBack = document.createElement('div');
-                cardBack.className = 'card-back';
-                cardBack.textContent = symbol;
+                // Холих
+                for (let i = cards.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [cards[i], cards[j]] = [cards[j], cards[i]];
+                }
                 
-                card.appendChild(cardFront);
-                card.appendChild(cardBack);
+                // Картуудыг нэмэх
+                cards.forEach((symbol, index) => {
+                    const card = document.createElement('div');
+                    card.className = 'memory-card';
+                    card.dataset.symbol = symbol;
+                    
+                    const front = document.createElement('div');
+                    front.className = 'front';
+                    
+                    const back = document.createElement('div');
+                    back.className = 'back';
+                    back.textContent = symbol;
+                    
+                    card.appendChild(front);
+                    card.appendChild(back);
+                    
+                    card.addEventListener('click', () => flipCard(card));
+                    memoryGame.appendChild(card);
+                });
                 
-                card.addEventListener('click', () => flipCard(card));
+                // Статистик reset
+                attempts = 0;
+                timer = 0;
+                matchedPairs = 0;
+                attemptsElement.textContent = '0';
+                timerElement.textContent = '0';
                 
-                memoryGame.appendChild(card);
-            });
-            
-            // Reset game stats
-            attempts = 0;
-            timer = 0;
-            matchedPairs = 0;
-            attemptsElement.textContent = '0';
-            timerElement.textContent = '0';
-            
-            // Start timer
-            clearInterval(timerInterval);
-            startTimer();
-        }
-        
-        // Shuffle array (Fisher-Yates algorithm)
-        function shuffleArray(array) {
-            for (let i = array.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [array[i], array[j]] = [array[j], array[i]];
-            }
-            return array;
-        }
-        
-        // Flip card function
-        function flipCard(card) {
-            if (lockBoard || card === firstCard || card.classList.contains('matched')) {
-                return;
-            }
-            
-            card.classList.add('flipped');
-            
-            if (!firstCard) {
-                // First card flipped
-                firstCard = card;
-                return;
-            }
-            
-            // Second card flipped
-            secondCard = card;
-            attempts++;
-            attemptsElement.textContent = attempts;
-            
-            checkForMatch();
-        }
-        
-        // Check if cards match
-        function checkForMatch() {
-            lockBoard = true;
-            
-            const isMatch = firstCard.dataset.symbol === secondCard.dataset.symbol;
-            
-            if (isMatch) {
-                disableCards();
-            } else {
-                unflipCards();
-            }
-        }
-        
-        // Disable matched cards
-        function disableCards() {
-            firstCard.classList.add('matched');
-            secondCard.classList.add('matched');
-            matchedPairs++;
-            
-            if (matchedPairs === totalPairs) {
-                // Game completed
+                // Таймер эхлүүлэх
                 clearInterval(timerInterval);
-                setTimeout(showCelebration, 1000);
+                timerInterval = setInterval(() => {
+                    timer++;
+                    timerElement.textContent = timer;
+                }, 1000);
             }
             
-            resetBoard();
-        }
-        
-        // Unflip cards if they don't match
-        function unflipCards() {
-            setTimeout(() => {
-                firstCard.classList.remove('flipped');
-                secondCard.classList.remove('flipped');
-                resetBoard();
-            }, 1000);
-        }
-        
-        // Reset board after each turn
-        function resetBoard() {
-            [firstCard, secondCard] = [null, null];
-            lockBoard = false;
-        }
-        
-        // Start timer
-        function startTimer() {
-            timerInterval = setInterval(() => {
-                timer++;
-                timerElement.textContent = timer;
-            }, 1000);
-        }
-        
-        // Show celebration
-        function showCelebration() {
-            nightSkySection.style.opacity = '0';
+            // Карт эргүүлэх
+            function flipCard(card) {
+                if (lockBoard || card === firstCard || card.classList.contains('matched')) return;
+                
+                card.classList.add('flipped');
+                
+                if (!firstCard) {
+                    firstCard = card;
+                    return;
+                }
+                
+                secondCard = card;
+                attempts++;
+                attemptsElement.textContent = attempts;
+                checkForMatch();
+            }
             
-            setTimeout(() => {
+            // Таарч байгаа эсэхийг шалгах
+            function checkForMatch() {
+                lockBoard = true;
+                
+                const isMatch = firstCard.dataset.symbol === secondCard.dataset.symbol;
+                
+                if (isMatch) {
+                    disableCards();
+                } else {
+                    unflipCards();
+                }
+            }
+            
+            // Таарсан картуудыг идэвхгүй болгох
+            function disableCards() {
+                firstCard.classList.add('matched');
+                secondCard.classList.add('matched');
+                matchedPairs++;
+                
+                if (matchedPairs === totalPairs) {
+                    clearInterval(timerInterval);
+                    setTimeout(showCelebration, 1000);
+                }
+                
+                resetBoard();
+            }
+            
+            // Картуудыг буцаах
+            function unflipCards() {
+                setTimeout(() => {
+                    firstCard.classList.remove('flipped');
+                    secondCard.classList.remove('flipped');
+                    resetBoard();
+                }, 1000);
+            }
+            
+            // Тоглоомын тавцангийг reset хийх
+            function resetBoard() {
+                [firstCard, secondCard] = [null, null];
+                lockBoard = false;
+            }
+            
+            // Баяр хүргэх хэсэг харуулах
+            function showCelebration() {
                 nightSkySection.style.display = 'none';
                 celebrationSection.style.display = 'flex';
-                
-                setTimeout(() => {
-                    celebrationSection.style.opacity = '1';
-                    createStars(celebrationStars);
-                    createConfetti();
-                }, 50);
-            }, 800);
-        }
-        
-        // Transition to night sky
-        mainButton.addEventListener('click', function() {
-            // Create heart burst effect
-            createHeartBurst(this.getBoundingClientRect().x + this.offsetWidth/2, 
-                           this.getBoundingClientRect().y + this.offsetHeight/2);
-            
-            // Transition after a short delay
-            setTimeout(() => {
-                landingSection.style.opacity = '0';
-                
-                setTimeout(() => {
-                    landingSection.style.display = 'none';
-                    nightSkySection.style.display = 'flex';
-                    
-                    setTimeout(() => {
-                        nightSkySection.style.opacity = '1';
-                        createStars(starsContainer);
-                        createMemoryGame();
-                    }, 50);
-                }, 800);
-            }, 500);
-        });
-        
-        // Create heart burst effect
-        function createHeartBurst(x, y) {
-            const burstCount = 25;
-            const heartSVG = `<svg viewBox="0 0 32 29.6" xmlns="http://www.w3.org/2000/svg">
-                <path d="M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2
-                c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z"/>
-            </svg>`;
-            
-            for (let i = 0; i < burstCount; i++) {
-                const heart = document.createElement('div');
-                heart.classList.add('heart');
-                heart.innerHTML = heartSVG;
-                heart.style.position = 'fixed';
-                heart.style.left = `${x}px`;
-                heart.style.top = `${y}px`;
-                heart.style.width = '35px';
-                heart.style.height = '35px';
-                heart.style.zIndex = '100';
-                heart.style.animation = 'none';
-                
-                // Random direction
-                const angle = Math.random() * Math.PI * 2;
-                const distance = Math.random() * 100 + 60;
-                const duration = Math.random() * 0.8 + 0.5;
-                
-                heart.style.transition = `all ${duration}s ease-out`;
-                document.body.appendChild(heart);
-                
-                // Trigger animation
-                setTimeout(() => {
-                    heart.style.transform = `translate(${Math.cos(angle) * distance}px, ${Math.sin(angle) * distance}px) rotate(${Math.random() * 360}deg) scale(0.5)`;
-                    heart.style.opacity = '0';
-                }, 10);
-                
-                // Remove heart after animation
-                setTimeout(() => {
-                    heart.remove();
-                }, duration * 1000 + 100);
             }
-        }
-        
-        // Video play functionality
-        playButton.addEventListener('click', function() {
-            video.play();
-            this.style.display = 'none';
-        });
-        
-        // Video ended - show special gift button
-        video.addEventListener('ended', function() {
-            specialGiftButton.style.display = 'block';
-            createConfetti();
-        });
-        
-        // Special gift button functionality
-        specialGiftButton.addEventListener('click', function() {
-            popupOverlay.style.display = 'flex';
-        });
-        
-        // Close popup
-        closeButton.addEventListener('click', function() {
-            popupOverlay.style.display = 'none';
-        });
-        
-        // Close popup when clicking outside
-        popupOverlay.addEventListener('click', function(e) {
-            if (e.target === popupOverlay) {
+            
+            // Үндсэн товчны event
+            mainButton.addEventListener('click', function() {
+                landingSection.style.display = 'none';
+                nightSkySection.style.display = 'flex';
+                createMemoryGame();
+            });
+            
+            // Онцгой бэлэг товч
+            specialGiftButton.addEventListener('click', function() {
+                popupOverlay.style.display = 'flex';
+            });
+            
+            // Popup хаах
+            closeButton.addEventListener('click', function() {
                 popupOverlay.style.display = 'none';
-            }
-        });
-        
-        // Create confetti
-        function createConfetti() {
-            const confettiCount = 100;
-            const colors = ['#ff69b4', '#9370db', '#20b2aa', '#ffa500', '#ffd700', '#ff4d6d', '#ff8fa3'];
+            });
             
-            for (let i = 0; i < confettiCount; i++) {
-                const confetti = document.createElement('div');
-                confetti.classList.add('confetti');
-                
-                // Random color
-                const color = colors[Math.floor(Math.random() * colors.length)];
-                confetti.style.backgroundColor = color;
-                
-                // Random position
-                const x = Math.random() * window.innerWidth;
-                const y = -20;
-                
-                // Random size
-                const size = Math.random() * 10 + 5;
-                
-                // Random rotation
-                const rotation = Math.random() * 360;
-                
-                // Random animation
-                const duration = Math.random() * 3 + 2;
-                const delay = Math.random() * 0.5;
-                
-                confetti.style.left = `${x}px`;
-                confetti.style.top = `${y}px`;
-                confetti.style.width = `${size}px`;
-                confetti.style.height = `${size}px`;
-                confetti.style.transform = `rotate(${rotation}deg)`;
-                confetti.style.animation = `fall ${duration}s linear ${delay}s forwards`;
-                
-                document.body.appendChild(confetti);
-                
-                // Remove confetti after animation
-                setTimeout(() => {
-                    confetti.remove();
-                }, (duration + delay) * 1000);
-            }
-            
-            // Add fall animation
-            const style = document.createElement('style');
-            style.textContent = `
-                @keyframes fall {
-                    to {
-                        transform: translateY(${window.innerHeight + 100}px) rotate(${Math.random() * 720}deg);
-                        opacity: 0;
-                    }
+            // Гадна товшиход хаах
+            popupOverlay.addEventListener('click', function(e) {
+                if (e.target === popupOverlay) {
+                    popupOverlay.style.display = 'none';
                 }
-            `;
-            document.head.appendChild(style);
-        }
-        
-        // Initialize the page
-        createHearts();
+            });
+            
+            // Эхлүүлэх
+            createHearts();
+        });
     </script>
 </body>
 </html>
