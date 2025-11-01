@@ -316,78 +316,156 @@
             transition: all 0.4s ease;
             box-shadow: 0 5px 20px rgba(255, 77, 109, 0.5);
             font-family: 'Playfair Display', serif;
-            margin-top: 20px;
+            margin-top: 30px;
+            display: none;
+            animation: fadeInUp 0.5s ease 0.2s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Video Container - ШИНЭЧЛЭГДСЭН */
+        .video-section {
+            width: 100%;
+            max-width: 700px;
+            margin: 30px auto;
+            text-align: center;
         }
 
         .video-container {
             position: relative;
             width: 100%;
-            max-width: 700px;
-            margin: 30px auto;
             border-radius: 20px;
             overflow: hidden;
-            background: linear-gradient(135deg, #ff4d6d, #ff8fa3);
-            min-height: 400px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.2rem;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+            margin-bottom: 20px;
         }
 
-        /* Popup Letter */
+        .video-player {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            display: block;
+            background: #000;
+        }
+
+        .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 77, 109, 0.9);
+            backdrop-filter: blur(10px);
+            border-radius: 50%;
+            width: 90px;
+            height: 90px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+
+        .play-button:hover {
+            background: rgba(255, 77, 109, 1);
+            transform: translate(-50%, -50%) scale(1.15);
+        }
+
+        .play-button::after {
+            content: '';
+            width: 0;
+            height: 0;
+            border-top: 18px solid transparent;
+            border-bottom: 18px solid transparent;
+            border-left: 30px solid white;
+            margin-left: 8px;
+        }
+
+        /* ШИНЭЧЛЭГДСЭН POPUP STYLE */
         .popup-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.85);
+            background: rgba(0, 0, 0, 0.8);
             display: none;
             justify-content: center;
             align-items: center;
             z-index: 1000;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         .popup-letter {
             background: #fff8f0;
-            border-radius: 20px;
-            padding: 50px;
-            max-width: 550px;
+            border-radius: 15px;
+            padding: 30px;
+            max-width: 400px;
             width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
             position: relative;
-            animation: popIn 0.6s ease;
+            animation: slideUp 0.4s ease;
             border: 2px solid #ff8fa3;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         }
 
-        @keyframes popIn {
-            0% { transform: scale(0.8) translateY(20px); opacity: 0; }
-            100% { transform: scale(1) translateY(0); opacity: 1; }
+        @keyframes slideUp {
+            from { 
+                transform: translateY(30px) scale(0.9);
+                opacity: 0;
+            }
+            to { 
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
         }
 
         .letter-content {
             font-family: 'Dancing Script', cursive;
             color: #5a3d3d;
-            font-size: 1.4rem;
-            line-height: 1.8;
+            font-size: 1.1rem;
+            line-height: 1.6;
             text-align: center;
         }
 
         .close-button {
             position: absolute;
-            top: 20px;
-            right: 20px;
+            top: 15px;
+            right: 15px;
             background: #ff4d6d;
             border: none;
             border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            font-size: 1.2rem;
+            width: 35px;
+            height: 35px;
+            font-size: 1rem;
             color: white;
             cursor: pointer;
             display: flex;
             justify-content: center;
             align-items: center;
+            transition: all 0.3s ease;
+            z-index: 1001;
+        }
+
+        .close-button:hover {
+            background: #ff3357;
+            transform: scale(1.1);
         }
 
         /* Confetti */
@@ -421,12 +499,19 @@
                 height: 80px;
                 font-size: 1.8rem;
             }
-            .video-container {
-                min-height: 300px;
+            .video-player {
+                height: 300px;
             }
             .heart {
                 width: 25px;
                 height: 25px;
+            }
+            .popup-letter {
+                padding: 25px;
+                max-width: 350px;
+            }
+            .letter-content {
+                font-size: 1rem;
             }
         }
 
@@ -441,6 +526,20 @@
             .heart {
                 width: 20px;
                 height: 20px;
+            }
+            .popup-letter {
+                padding: 20px;
+                max-width: 300px;
+            }
+            .letter-content {
+                font-size: 0.9rem;
+                line-height: 1.5;
+            }
+            .close-button {
+                width: 30px;
+                height: 30px;
+                top: 10px;
+                right: 10px;
             }
         }
     </style>
@@ -480,26 +579,33 @@
         </div>
     </section>
 
-    <!-- Celebration Section -->
+    <!-- Celebration Section - ШИНЭЧЛЭГДСЭН -->
     <section id="celebration" class="hidden">
         <div class="stars" id="celebration-stars"></div>
         <div class="celebration-content">
             <h1 class="celebration-title">Баяр хүргэе! 🎉</h1>
             <p class="celebration-message">
                 Та тоглоомыг амжилттай дуусгалаа! Миний хайртд зориулсан онцгой бэлэгт тавтай морил. 💝<br>
-                Энэ онцгой өдөрт чинь зориулсан миний хайрын илэрхийлэл болон баяр хүргэлтийг хүлээн авна уу. ✨
+                Энэ онцгой өдөр чинь зориулсан миний хайрын илэрхийлэл болон баяр хүргэлтийг хүлээн авна уу. ✨
             </p>
             
-            <!-- Video Placeholder -->
-            <div class="video-container">
-                <div>🎬 Миний хайрын бичлэг энд байх болно...</div>
+            <!-- Video Section - ШИНЭЧЛЭГДСЭН -->
+            <div class="video-section">
+                <div class="video-container">
+                    <video class="video-player" id="birthday-video">
+                        <source src="Bichleg1.mp4" type="video/mp4">
+                        Таны хөтөч видео тоглуулах боломжгүй байна.
+                    </video>
+                    <div class="play-button" id="play-button"></div>
+                </div>
+                
+                <!-- "Онцгой бэлэг" товч видеоны дэргэд байрлана -->
+                <button class="special-gift-button" id="special-gift-button">💌 Онцгой бэлэг</button>
             </div>
-            
-            <button class="special-gift-button" id="special-gift-button">💌 Онцгой бэлэг</button>
         </div>
     </section>
 
-    <!-- Popup Letter -->
+    <!-- ШИНЭЧЛЭГДСЭН POPUP LETTER -->
     <div class="popup-overlay" id="popup-overlay">
         <div class="popup-letter">
             <button class="close-button" id="close-button">✕</button>
@@ -530,6 +636,8 @@
         const memoryGame = document.getElementById('memory-game');
         const attemptsElement = document.getElementById('attempts');
         const timerElement = document.getElementById('timer');
+        const video = document.getElementById('birthday-video');
+        const playButton = document.getElementById('play-button');
         const specialGiftButton = document.getElementById('special-gift-button');
         const popupOverlay = document.getElementById('popup-overlay');
         const closeButton = document.getElementById('close-button');
@@ -736,6 +844,18 @@
             }
         }
 
+        // Video ended - show special gift button
+        video.addEventListener('ended', function() {
+            specialGiftButton.style.display = 'block';
+            createConfetti();
+        });
+
+        // Video play functionality
+        playButton.addEventListener('click', function() {
+            video.play();
+            this.style.display = 'none';
+        });
+
         // Event listeners
         mainButton.addEventListener('click', function() {
             landingSection.classList.add('hidden');
@@ -754,6 +874,13 @@
 
         popupOverlay.addEventListener('click', function(e) {
             if (e.target === popupOverlay) {
+                popupOverlay.style.display = 'none';
+            }
+        });
+
+        // Keyboard support for popup
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && popupOverlay.style.display === 'flex') {
                 popupOverlay.style.display = 'none';
             }
         });
