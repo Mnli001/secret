@@ -707,44 +707,51 @@
             }
         }
         
-        // Create memory game - EMOJI-Г БҮРЭН ЗАССАН
+        // ШИНЭ 4x4 САНАХ ОЙН ТОГЛООМЫН КОД
         function createMemoryGame() {
-            // Duplicate symbols to create pairs
-            const gameCards = [...cardSymbols, ...cardSymbols];
-            
-            // Shuffle cards
-            shuffleArray(gameCards);
-            
             // Clear existing cards
             memoryGame.innerHTML = '';
             
+            // Create card pairs
+            const cards = [];
+            for (let i = 0; i < totalPairs; i++) {
+                cards.push(cardSymbols[i]);
+                cards.push(cardSymbols[i]);
+            }
+            
+            // Shuffle cards
+            shuffleArray(cards);
+            
             // Create card elements
-            gameCards.forEach((symbol, index) => {
+            cards.forEach((symbol, index) => {
                 const card = document.createElement('div');
-                card.classList.add('memory-card');
+                card.className = 'memory-card';
                 card.dataset.symbol = symbol;
-                card.dataset.index = index;
                 
                 const cardFront = document.createElement('div');
-                cardFront.classList.add('card-front');
+                cardFront.className = 'card-front';
                 
                 const cardBack = document.createElement('div');
-                cardBack.classList.add('card-back');
-                cardBack.textContent = symbol; // EMOJI нь энд байх ёстой!
-                cardBack.style.fontSize = '2.5rem';
-                cardBack.style.display = 'flex';
-                cardBack.style.justifyContent = 'center';
-                cardBack.style.alignItems = 'center';
+                cardBack.className = 'card-back';
+                cardBack.textContent = symbol;
                 
                 card.appendChild(cardFront);
                 card.appendChild(cardBack);
                 
-                card.addEventListener('click', flipCard);
+                card.addEventListener('click', () => flipCard(card));
                 
                 memoryGame.appendChild(card);
             });
             
+            // Reset game stats
+            attempts = 0;
+            timer = 0;
+            matchedPairs = 0;
+            attemptsElement.textContent = '0';
+            timerElement.textContent = '0';
+            
             // Start timer
+            clearInterval(timerInterval);
             startTimer();
         }
         
@@ -758,21 +765,21 @@
         }
         
         // Flip card function
-        function flipCard() {
-            if (lockBoard) return;
-            if (this === firstCard) return;
-            if (this.classList.contains('matched')) return;
+        function flipCard(card) {
+            if (lockBoard || card === firstCard || card.classList.contains('matched')) {
+                return;
+            }
             
-            this.classList.add('flipped');
+            card.classList.add('flipped');
             
             if (!firstCard) {
                 // First card flipped
-                firstCard = this;
+                firstCard = card;
                 return;
             }
             
             // Second card flipped
-            secondCard = this;
+            secondCard = card;
             attempts++;
             attemptsElement.textContent = attempts;
             
@@ -781,17 +788,12 @@
         
         // Check if cards match
         function checkForMatch() {
+            lockBoard = true;
+            
             const isMatch = firstCard.dataset.symbol === secondCard.dataset.symbol;
             
             if (isMatch) {
                 disableCards();
-                matchedPairs++;
-                
-                if (matchedPairs === totalPairs) {
-                    // Game completed
-                    clearInterval(timerInterval);
-                    setTimeout(showCelebration, 1000);
-                }
             } else {
                 unflipCards();
             }
@@ -801,18 +803,22 @@
         function disableCards() {
             firstCard.classList.add('matched');
             secondCard.classList.add('matched');
+            matchedPairs++;
+            
+            if (matchedPairs === totalPairs) {
+                // Game completed
+                clearInterval(timerInterval);
+                setTimeout(showCelebration, 1000);
+            }
             
             resetBoard();
         }
         
         // Unflip cards if they don't match
         function unflipCards() {
-            lockBoard = true;
-            
             setTimeout(() => {
                 firstCard.classList.remove('flipped');
                 secondCard.classList.remove('flipped');
-                
                 resetBoard();
             }, 1000);
         }
