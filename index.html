@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Төрсөн өдрийн мэнд</title>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -13,91 +12,31 @@
         }
 
         body {
-            font-family: 'Playfair Display', serif;
-            background: linear-gradient(135deg, #1a0033 0%, #330033 50%, #4d004d 100%);
-            color: #fff;
-            overflow-x: hidden;
-            line-height: 1.6;
-        }
-
-        /* Landing Section */
-        #landing {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #1a0033 0%, #330033 100%);
+            color: white;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
             text-align: center;
-            position: relative;
-            overflow: hidden;
         }
 
-        .floating-hearts {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            pointer-events: none;
+        .container {
+            max-width: 800px;
+            padding: 20px;
         }
 
-        .heart {
-            position: absolute;
-            width: 40px;
-            height: 40px;
-            opacity: 0.9;
-            animation: float 6s infinite ease-in-out;
-            filter: drop-shadow(0 0 10px rgba(255, 77, 109, 0.8));
-            z-index: 1;
-        }
-
-        .heart svg {
-            width: 100%;
-            height: 100%;
-            fill: #ff4d6d;
-        }
-
-        @keyframes float {
-            0%, 100% { 
-                transform: translate(0, 0) rotate(0deg) scale(1);
-                opacity: 0.9;
-            }
-            25% { 
-                transform: translate(5px, -15px) rotate(3deg) scale(1.05);
-            }
-            50% { 
-                transform: translate(-3px, -25px) rotate(0deg) scale(1.1);
-                opacity: 1;
-            }
-            75% { 
-                transform: translate(-5px, -15px) rotate(-3deg) scale(1.05);
-            }
-        }
-
-        .welcome-text {
-            margin-bottom: 40px;
-            z-index: 2;
-            position: relative;
-        }
-
-        .welcome-text h1 {
-            font-family: 'Dancing Script', cursive;
-            font-size: 4rem;
-            color: #ffccff;
-            text-shadow: 0 0 15px rgba(255, 204, 255, 0.8);
+        h1 {
+            font-size: 3rem;
             margin-bottom: 20px;
-            animation: glow 2s infinite alternate;
+            color: #ffccff;
         }
 
-        @keyframes glow {
-            from { text-shadow: 0 0 10px rgba(255, 204, 255, 0.7); }
-            to { text-shadow: 0 0 20px rgba(255, 204, 255, 0.9); }
-        }
-
-        .welcome-text p {
-            font-size: 1.3rem;
-            max-width: 600px;
-            margin: 0 auto;
+        .subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
             color: #e6ccff;
         }
 
@@ -105,582 +44,260 @@
             background: linear-gradient(45deg, #ff4d6d, #ff8fa3);
             border: none;
             border-radius: 50px;
-            padding: 18px 45px;
-            font-size: 1.4rem;
+            padding: 15px 30px;
+            font-size: 1.2rem;
             color: white;
             cursor: pointer;
-            transition: all 0.4s ease;
-            box-shadow: 0 5px 20px rgba(255, 77, 109, 0.5);
-            z-index: 2;
-            font-family: 'Playfair Display', serif;
-            margin-top: 20px;
-        }
-
-        .main-button:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 10px 25px rgba(255, 77, 109, 0.7);
-        }
-
-        /* Night Sky Section */
-        #night-sky {
-            min-height: 100vh;
-            display: none;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 40px 20px;
-            position: relative;
-        }
-
-        .stars {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-        }
-
-        .star {
-            position: absolute;
-            background-color: white;
-            border-radius: 50%;
-            animation: twinkle 3s infinite;
-        }
-
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.3; }
-            50% { opacity: 1; }
-        }
-
-        .headline {
-            font-family: 'Dancing Script', cursive;
-            font-size: 4.5rem;
-            text-align: center;
-            margin-bottom: 30px;
-            background: linear-gradient(45deg, #ffccff, #ff99cc, #ff66b2);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            animation: shimmer 3s ease infinite;
-        }
-
-        @keyframes shimmer {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        .subtitle {
-            max-width: 700px;
-            text-align: center;
-            padding: 25px;
-            margin-bottom: 40px;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(15px);
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            font-size: 1.3rem;
-            line-height: 1.8;
-            color: #f0e6ff;
-        }
-
-        /* Memory Game - ШИНЭ ЭНГИЙН ХЭЛБЭР */
-        .memory-game-container {
-            width: 100%;
-            max-width: 600px;
-            margin: 30px auto;
-            padding: 25px;
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(15px);
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            position: relative;
-            z-index: 2;
-        }
-
-        .game-title {
-            font-family: 'Dancing Script', cursive;
-            font-size: 2.5rem;
-            text-align: center;
-            margin-bottom: 20px;
-            color: #ffccff;
-        }
-
-        .game-instructions {
-            text-align: center;
-            margin-bottom: 20px;
-            color: #e6ccff;
-            font-size: 1.1rem;
+            margin: 10px;
         }
 
         .memory-game {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            grid-gap: 10px;
-            margin: 0 auto;
+            gap: 10px;
+            margin: 20px auto;
             max-width: 500px;
         }
 
         .memory-card {
-            width: 100%;
-            height: 100px;
-            background: linear-gradient(135deg, #ff4d6d, #ff8fa3);
-            border-radius: 12px;
+            width: 80px;
+            height: 80px;
+            background: #ff4d6d;
+            border-radius: 10px;
             display: flex;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
             cursor: pointer;
-            position: relative;
-            transform-style: preserve-3d;
-            transition: transform 0.6s;
-            font-size: 2rem;
+            font-size: 1.5rem;
+            transition: transform 0.3s;
         }
 
         .memory-card.flipped {
-            transform: rotateY(180deg);
-        }
-
-        .memory-card .front,
-        .memory-card .back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            backface-visibility: hidden;
-            border-radius: 12px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .memory-card .front {
-            background: linear-gradient(135deg, #ff4d6d, #ff8fa3);
-        }
-
-        .memory-card .back {
             background: white;
             color: #ff4d6d;
             transform: rotateY(180deg);
         }
 
-        .memory-card.matched {
-            background: linear-gradient(135deg, #4CAF50, #45a049);
-            cursor: default;
-        }
-
-        .game-stats {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
-            color: #e6ccff;
-            font-size: 1.1rem;
-        }
-
-        /* Бусад хэсгүүд */
-        #celebration {
-            min-height: 100vh;
-            display: none;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 40px 20px;
-            position: relative;
-        }
-
-        .celebration-content {
-            text-align: center;
-            max-width: 800px;
-            z-index: 2;
-        }
-
-        .celebration-title {
-            font-family: 'Dancing Script', cursive;
-            font-size: 4rem;
-            margin-bottom: 30px;
-            color: #ffccff;
-            animation: pulse 1.5s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-        }
-
-        .celebration-message {
-            font-size: 1.5rem;
-            margin-bottom: 40px;
-            color: #e6ccff;
-            line-height: 1.8;
-        }
-
-        .special-gift-button {
-            background: linear-gradient(45deg, #ff4d6d, #ff8fa3);
-            border: none;
-            border-radius: 50px;
-            padding: 18px 45px;
-            font-size: 1.5rem;
-            color: white;
-            cursor: pointer;
-            transition: all 0.4s ease;
-            box-shadow: 0 5px 20px rgba(255, 77, 109, 0.5);
-            font-family: 'Playfair Display', serif;
-            margin-top: 20px;
+        .hidden {
             display: none;
         }
 
-        .video-container {
-            position: relative;
-            width: 100%;
-            max-width: 700px;
-            margin: 30px auto;
-            border-radius: 20px;
-            overflow: hidden;
-        }
-
-        .video-player {
-            width: 100%;
-            height: 400px;
-            background: linear-gradient(135deg, #ff4d6d, #ff8fa3);
-        }
-
-        .play-button {
+        .heart {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(255, 77, 109, 0.9);
-            border-radius: 50%;
-            width: 90px;
-            height: 90px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            border: 2px solid rgba(255,255,255,0.3);
+            font-size: 2rem;
+            animation: float 3s infinite;
         }
 
-        .play-button::after {
-            content: '';
-            width: 0;
-            height: 0;
-            border-top: 18px solid transparent;
-            border-bottom: 18px solid transparent;
-            border-left: 30px solid white;
-            margin-left: 8px;
-        }
-
-        .popup-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.85);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
-
-        .popup-letter {
-            background: #fff8f0;
-            border-radius: 20px;
-            padding: 50px;
-            max-width: 550px;
-            width: 90%;
-            position: relative;
-        }
-
-        .letter-content {
-            font-family: 'Dancing Script', cursive;
-            color: #5a3d3d;
-            font-size: 1.4rem;
-            line-height: 1.8;
-            text-align: center;
-        }
-
-        .close-button {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: #ff4d6d;
-            border: none;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            font-size: 1.2rem;
-            color: white;
-            cursor: pointer;
-        }
-
-        @media (max-width: 768px) {
-            .welcome-text h1, .headline { font-size: 2.8rem; }
-            .celebration-title { font-size: 3rem; }
-            .subtitle, .celebration-message { font-size: 1.1rem; padding: 20px; }
-            .main-button, .special-gift-button { padding: 15px 35px; font-size: 1.2rem; }
-            .memory-card { height: 80px; font-size: 1.8rem; }
-            .video-player { height: 300px; }
-            .heart { width: 35px; height: 35px; }
-        }
-
-        @media (max-width: 480px) {
-            .memory-game { grid-gap: 5px; }
-            .memory-card { height: 70px; font-size: 1.5rem; }
-            .heart { width: 30px; height: 30px; }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
         }
     </style>
 </head>
 <body>
-    <!-- Landing Section -->
-    <section id="landing">
-        <div class="floating-hearts" id="floating-hearts"></div>
-        <div class="welcome-text">
-            <h1>Миний хайртдaa</h1>
-            <p>Чамд зориулсан онцгой бэлэг бэлтгэсэн байна. Энэ товчийг дарж үзээрэй.</p>
-        </div>
-        <button class="main-button" id="main-button">Энд дар</button>
-    </section>
-    
-    <!-- Night Sky Section -->
-    <section id="night-sky">
-        <div class="stars" id="stars"></div>
+    <!-- Эхлэл -->
+    <div id="landing" class="container">
+        <h1>Миний хайртдaa 💖</h1>
+        <p class="subtitle">Чамд зориулсан онцгой бэлэг бэлтгэсэн байна</p>
+        <button class="main-button" onclick="startGame()">Энд дар</button>
+    </div>
+
+    <!-- Тоглоом -->
+    <div id="game" class="container hidden">
+        <h1>Төрсөн өдрийн мэнд! 🎂</h1>
+        <p class="subtitle">Хоёр ижил зүрхний дүрсийг олж таарга!</p>
         
-        <h1 class="headline">Төрсөн өдрийн мэнд</h1>
+        <div class="memory-game" id="memoryGame"></div>
         
-        <div class="subtitle">
-            Өнөөдөр чиний минь хамгийн онцгой өдөр, энэ онцгой өдөрт нь зориулсан миний бяцхан бэлгийг хүлээн авна уу.
-        </div>
-        
-        <!-- Memory Game -->
-        <div class="memory-game-container">
-            <h2 class="game-title">Хайрын санах ойн тоглоом</h2>
-            <p class="game-instructions">Хоёр ижил зүрхний дүрсийг олж таарга!</p>
-            <div class="memory-game" id="memory-game"></div>
-            <div class="game-stats">
-                <div>Оролдлого: <span id="attempts">0</span></div>
-                <div>Хэрэглэсэн хугацаа: <span id="timer">0</span> сек</div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Celebration Section -->
-    <section id="celebration">
-        <div class="stars" id="celebration-stars"></div>
-        <div class="celebration-content">
-            <h1 class="celebration-title">Баяр хүргэе!</h1>
-            <p class="celebration-message">
-                Та тоглоомыг амжилттай дуусгалаа! Миний хайртд зориулсан онцгой бэлэгт тавтай морил.
-            </p>
-            
-            <div class="video-container">
-                <video class="video-player" id="birthday-video">
-                    <source src="Bichleg1.mp4" type="video/mp4">
-                </video>
-                <div class="play-button" id="play-button"></div>
-            </div>
-            
-            <button class="special-gift-button" id="special-gift-button">Онцгой бэлэг</button>
-        </div>
-    </section>
-    
-    <!-- Popup Letter -->
-    <div class="popup-overlay" id="popup-overlay">
-        <div class="popup-letter">
-            <button class="close-button" id="close-button">✕</button>
-            <div class="letter-content">
-                Миний хайрт хүнд,<br><br>
-                Төрсөн өдрийн чинь мэнд хүргэе! Энэ онцгой өдөр чинь миний амьдралд гэрэл авьяас авчирсан шиг байна.
-            </div>
+        <div style="margin: 20px;">
+            <div>Оролдлого: <span id="attempts">0</span></div>
+            <div>Хэрэглэсэн хугацаа: <span id="timer">0</span> сек</div>
         </div>
     </div>
-    
+
+    <!-- Баяр хүргэх -->
+    <div id="celebration" class="container hidden">
+        <h1>Баяр хүргэе! 🎉</h1>
+        <p class="subtitle">Та тоглоомыг амжилттай дуусгалаа!</p>
+        <button class="main-button" onclick="showLetter()">Онцгой бэлэг</button>
+    </div>
+
+    <!-- Захидал -->
+    <div id="letter" class="container hidden">
+        <div style="background: white; color: #333; padding: 30px; border-radius: 15px; max-width: 500px;">
+            <h2 style="color: #ff4d6d;">Миний хайрт хүнд,</h2>
+            <p style="text-align: left; line-height: 1.6; margin: 20px 0;">
+                Төрсөн өдрийн чинь мэнд хүргэе! 💝<br><br>
+                Чи бол миний амьдралын хамгийн үнэт бэлэг юм. Энэ өдөр чинь баяр баясгалангаар дүүрэн, 
+                бүх мөрөөдөл чинь биелэгдэж, хайр халамж чинь эргэн ирэхийг хүсье.<br><br>
+                Чамд үргэлж хайртай байх болно!<br>
+                Чиний хайрт 💕
+            </p>
+        </div>
+        <button class="main-button" onclick="restartGame()">Дахь эхлэх</button>
+    </div>
+
     <script>
-        // ЭНГИЙН АЖИЛЛАХ ТОГЛООМЫН КОД
-        document.addEventListener('DOMContentLoaded', function() {
-            const landingSection = document.getElementById('landing');
-            const nightSkySection = document.getElementById('night-sky');
-            const celebrationSection = document.getElementById('celebration');
-            const mainButton = document.getElementById('main-button');
-            const memoryGame = document.getElementById('memory-game');
-            const attemptsElement = document.getElementById('attempts');
-            const timerElement = document.getElementById('timer');
-            const specialGiftButton = document.getElementById('special-gift-button');
-            const popupOverlay = document.getElementById('popup-overlay');
-            const closeButton = document.getElementById('close-button');
-            
-            let attempts = 0;
-            let timer = 0;
-            let timerInterval;
-            let firstCard = null;
-            let secondCard = null;
-            let lockBoard = false;
-            let matchedPairs = 0;
-            const totalPairs = 8;
-            
-            const cardSymbols = ['❤️', '💖', '💕', '💗', '💓', '💞', '💘', '💝'];
-            
-            // Зүрх үүсгэх
-            function createHearts() {
-                const heartsCount = 15;
-                const heartSVG = `<svg viewBox="0 0 32 29.6">
-                    <path d="M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z"/>
-                </svg>`;
-                
-                for (let i = 0; i < heartsCount; i++) {
-                    const heart = document.createElement('div');
-                    heart.className = 'heart';
-                    heart.innerHTML = heartSVG;
-                    heart.style.left = Math.random() * 80 + 10 + '%';
-                    heart.style.top = Math.random() * 80 + 10 + '%';
-                    heart.style.animationDelay = Math.random() * 5 + 's';
-                    document.getElementById('floating-hearts').appendChild(heart);
-                }
-            }
-            
-            // Тоглоом үүсгэх
-            function createMemoryGame() {
-                memoryGame.innerHTML = '';
-                const cards = [];
-                
-                // Хос карт үүсгэх
-                for (let i = 0; i < totalPairs; i++) {
-                    cards.push(cardSymbols[i]);
-                    cards.push(cardSymbols[i]);
-                }
-                
-                // Холих
-                for (let i = cards.length - 1; i > 0; i--) {
-                    const j = Math.floor(Math.random() * (i + 1));
-                    [cards[i], cards[j]] = [cards[j], cards[i]];
-                }
-                
-                // Картуудыг нэмэх
-                cards.forEach((symbol, index) => {
-                    const card = document.createElement('div');
-                    card.className = 'memory-card';
-                    card.dataset.symbol = symbol;
-                    
-                    const front = document.createElement('div');
-                    front.className = 'front';
-                    
-                    const back = document.createElement('div');
-                    back.className = 'back';
-                    back.textContent = symbol;
-                    
-                    card.appendChild(front);
-                    card.appendChild(back);
-                    
-                    card.addEventListener('click', () => flipCard(card));
-                    memoryGame.appendChild(card);
-                });
-                
-                // Статистик reset
-                attempts = 0;
-                timer = 0;
-                matchedPairs = 0;
-                attemptsElement.textContent = '0';
-                timerElement.textContent = '0';
-                
-                // Таймер эхлүүлэх
-                clearInterval(timerInterval);
-                timerInterval = setInterval(() => {
-                    timer++;
-                    timerElement.textContent = timer;
-                }, 1000);
-            }
-            
-            // Карт эргүүлэх
-            function flipCard(card) {
-                if (lockBoard || card === firstCard || card.classList.contains('matched')) return;
-                
-                card.classList.add('flipped');
-                
-                if (!firstCard) {
-                    firstCard = card;
-                    return;
-                }
-                
-                secondCard = card;
-                attempts++;
-                attemptsElement.textContent = attempts;
-                checkForMatch();
-            }
-            
-            // Таарч байгаа эсэхийг шалгах
-            function checkForMatch() {
-                lockBoard = true;
-                
-                const isMatch = firstCard.dataset.symbol === secondCard.dataset.symbol;
-                
-                if (isMatch) {
-                    disableCards();
-                } else {
-                    unflipCards();
-                }
-            }
-            
-            // Таарсан картуудыг идэвхгүй болгох
-            function disableCards() {
-                firstCard.classList.add('matched');
-                secondCard.classList.add('matched');
-                matchedPairs++;
-                
-                if (matchedPairs === totalPairs) {
-                    clearInterval(timerInterval);
-                    setTimeout(showCelebration, 1000);
-                }
-                
-                resetBoard();
-            }
-            
-            // Картуудыг буцаах
-            function unflipCards() {
-                setTimeout(() => {
-                    firstCard.classList.remove('flipped');
-                    secondCard.classList.remove('flipped');
-                    resetBoard();
-                }, 1000);
-            }
-            
-            // Тоглоомын тавцангийг reset хийх
-            function resetBoard() {
-                [firstCard, secondCard] = [null, null];
-                lockBoard = false;
-            }
-            
-            // Баяр хүргэх хэсэг харуулах
-            function showCelebration() {
-                nightSkySection.style.display = 'none';
-                celebrationSection.style.display = 'flex';
-            }
-            
-            // Үндсэн товчны event
-            mainButton.addEventListener('click', function() {
-                landingSection.style.display = 'none';
-                nightSkySection.style.display = 'flex';
-                createMemoryGame();
-            });
-            
-            // Онцгой бэлэг товч
-            specialGiftButton.addEventListener('click', function() {
-                popupOverlay.style.display = 'flex';
-            });
-            
-            // Popup хаах
-            closeButton.addEventListener('click', function() {
-                popupOverlay.style.display = 'none';
-            });
-            
-            // Гадна товшиход хаах
-            popupOverlay.addEventListener('click', function(e) {
-                if (e.target === popupOverlay) {
-                    popupOverlay.style.display = 'none';
-                }
-            });
-            
-            // Эхлүүлэх
+        // Тоглоомын хувьсагчууд
+        let attempts = 0;
+        let timer = 0;
+        let timerInterval;
+        let firstCard = null;
+        let secondCard = null;
+        let lockBoard = false;
+        let matchedPairs = 0;
+        const totalPairs = 8;
+
+        // Зүрхний emoji
+        const cardSymbols = ['❤️', '💖', '💕', '💗', '💓', '💞', '💘', '💝'];
+
+        // Тоглоом эхлүүлэх
+        function startGame() {
+            document.getElementById('landing').classList.add('hidden');
+            document.getElementById('game').classList.remove('hidden');
+            createMemoryGame();
             createHearts();
-        });
+            startTimer();
+        }
+
+        // Зүрхсэн үүсгэх
+        function createHearts() {
+            for (let i = 0; i < 10; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.innerHTML = '💖';
+                heart.style.left = Math.random() * 90 + 5 + '%';
+                heart.style.top = Math.random() * 90 + 5 + '%';
+                heart.style.animationDelay = Math.random() * 2 + 's';
+                document.body.appendChild(heart);
+            }
+        }
+
+        // Санах ойн тоглоом үүсгэх
+        function createMemoryGame() {
+            const memoryGame = document.getElementById('memoryGame');
+            memoryGame.innerHTML = '';
+            
+            // Хос картууд
+            const cards = [];
+            for (let i = 0; i < totalPairs; i++) {
+                cards.push(cardSymbols[i]);
+                cards.push(cardSymbols[i]);
+            }
+            
+            // Холих
+            for (let i = cards.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [cards[i], cards[j]] = [cards[j], cards[i]];
+            }
+            
+            // Картуудыг нэмэх
+            cards.forEach((symbol, index) => {
+                const card = document.createElement('div');
+                card.className = 'memory-card';
+                card.dataset.symbol = symbol;
+                card.textContent = '?';
+                
+                card.addEventListener('click', () => flipCard(card));
+                memoryGame.appendChild(card);
+            });
+
+            // Статистик reset
+            attempts = 0;
+            timer = 0;
+            matchedPairs = 0;
+            document.getElementById('attempts').textContent = '0';
+            document.getElementById('timer').textContent = '0';
+        }
+
+        // Карт эргүүлэх
+        function flipCard(card) {
+            if (lockBoard || card === firstCard || card.classList.contains('flipped')) return;
+            
+            card.textContent = card.dataset.symbol;
+            card.classList.add('flipped');
+            
+            if (!firstCard) {
+                firstCard = card;
+                return;
+            }
+            
+            secondCard = card;
+            attempts++;
+            document.getElementById('attempts').textContent = attempts;
+            checkForMatch();
+        }
+
+        // Таарч байгаа эсэхийг шалгах
+        function checkForMatch() {
+            lockBoard = true;
+            
+            const isMatch = firstCard.dataset.symbol === secondCard.dataset.symbol;
+            
+            if (isMatch) {
+                disableCards();
+            } else {
+                unflipCards();
+            }
+        }
+
+        // Таарсан картууд
+        function disableCards() {
+            matchedPairs++;
+            
+            if (matchedPairs === totalPairs) {
+                clearInterval(timerInterval);
+                setTimeout(showCelebration, 1000);
+            }
+            
+            resetBoard();
+        }
+
+        // Буцаах
+        function unflipCards() {
+            setTimeout(() => {
+                firstCard.textContent = '?';
+                secondCard.textContent = '?';
+                firstCard.classList.remove('flipped');
+                secondCard.classList.remove('flipped');
+                resetBoard();
+            }, 1000);
+        }
+
+        // Reset
+        function resetBoard() {
+            [firstCard, secondCard] = [null, null];
+            lockBoard = false;
+        }
+
+        // Таймер
+        function startTimer() {
+            clearInterval(timerInterval);
+            timerInterval = setInterval(() => {
+                timer++;
+                document.getElementById('timer').textContent = timer;
+            }, 1000);
+        }
+
+        // Баяр хүргэх
+        function showCelebration() {
+            document.getElementById('game').classList.add('hidden');
+            document.getElementById('celebration').classList.remove('hidden');
+        }
+
+        // Захидал харуулах
+        function showLetter() {
+            document.getElementById('celebration').classList.add('hidden');
+            document.getElementById('letter').classList.remove('hidden');
+        }
+
+        // Дахь эхлэх
+        function restartGame() {
+            document.getElementById('letter').classList.add('hidden');
+            document.getElementById('game').classList.remove('hidden');
+            createMemoryGame();
+            startTimer();
+        }
     </script>
 </body>
 </html>
