@@ -642,39 +642,31 @@
         // Card symbols (heart variations)
         const cardSymbols = ['❤️', '💖', '💕', '💗', '💓', '💞', '💘', '💝'];
         
-        // Create floating hearts with SVG - голд нь төвлөрүүлсэн
+        // Create floating hearts with SVG - САНАМСАРГҮЙ БАЙРШИЛ
         function createHearts() {
-            const heartsCount = 12;
+            const heartsCount = 15;
             const heartSVG = `<svg viewBox="0 0 32 29.6" xmlns="http://www.w3.org/2000/svg">
                 <path d="M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2
                 c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z"/>
             </svg>`;
             
-            const colors = ['#ff4d6d', '#ff8fa3', '#ffb3c1', '#ffccff'];
-            
-            // Голд нь цуглуулсан зүрхсэн үүсгэх
-            const centerPositions = [
-                {x: 45, y: 45}, {x: 55, y: 45}, {x: 45, y: 55}, {x: 55, y: 55},
-                {x: 40, y: 50}, {x: 60, y: 50}, {x: 50, y: 40}, {x: 50, y: 60},
-                {x: 43, y: 43}, {x: 57, y: 43}, {x: 43, y: 57}, {x: 57, y: 57}
-            ];
+            const colors = ['#ff4d6d', '#ff8fa3', '#ffb3c1', '#ffccff', '#ff6b8b', '#ff8eab'];
             
             for (let i = 0; i < heartsCount; i++) {
                 const heart = document.createElement('div');
                 heart.classList.add('heart');
                 heart.innerHTML = heartSVG;
                 
-                // Голд нь төвлөрсөн байршил
-                const pos = centerPositions[i];
-                const x = pos.x + (Math.random() - 0.5) * 10; // Бага зэрэг санамсаргүй байршил
-                const y = pos.y + (Math.random() - 0.5) * 10;
+                // БҮР САНАМСАРГҮЙ БАЙРШИЛ
+                const x = Math.random() * 80 + 10; // 10% - 90% хооронд
+                const y = Math.random() * 80 + 10; // 10% - 90% хооронд
                 
                 // Random color
                 const color = colors[Math.floor(Math.random() * colors.length)];
                 
                 // Random animation delay and duration
-                const delay = Math.random() * 2;
-                const duration = Math.random() * 2 + 4;
+                const delay = Math.random() * 5;
+                const duration = Math.random() * 3 + 4;
                 
                 heart.style.left = `${x}%`;
                 heart.style.top = `${y}%`;
@@ -715,7 +707,7 @@
             }
         }
         
-        // Create memory game
+        // Create memory game - EMOJI-Г БҮРЭН ЗАССАН
         function createMemoryGame() {
             // Duplicate symbols to create pairs
             const gameCards = [...cardSymbols, ...cardSymbols];
@@ -739,6 +731,10 @@
                 const cardBack = document.createElement('div');
                 cardBack.classList.add('card-back');
                 cardBack.textContent = symbol; // EMOJI нь энд байх ёстой!
+                cardBack.style.fontSize = '2.5rem';
+                cardBack.style.display = 'flex';
+                cardBack.style.justifyContent = 'center';
+                cardBack.style.alignItems = 'center';
                 
                 card.appendChild(cardFront);
                 card.appendChild(cardBack);
@@ -765,6 +761,7 @@
         function flipCard() {
             if (lockBoard) return;
             if (this === firstCard) return;
+            if (this.classList.contains('matched')) return;
             
             this.classList.add('flipped');
             
@@ -804,8 +801,6 @@
         function disableCards() {
             firstCard.classList.add('matched');
             secondCard.classList.add('matched');
-            firstCard.removeEventListener('click', flipCard);
-            secondCard.removeEventListener('click', flipCard);
             
             resetBoard();
         }
