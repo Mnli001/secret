@@ -115,18 +115,15 @@
             50% { transform: scale(1.1); opacity: 1; }
         }
 
-        /* Calendar */
+        /* Calendar - Одоо баяр хүргэх хэсэгт байрлана */
         .calendar-container {
-            position: absolute;
-            top: 45%;
-            left: 50%;
-            transform: translateX(-50%);
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(15px);
             border-radius: 20px;
             padding: 25px;
             border: 1px solid rgba(255, 255, 255, 0.2);
-            z-index: 10;
+            margin: 30px auto;
+            max-width: 400px;
         }
 
         .calendar-title {
@@ -706,6 +703,32 @@
             display: none;
         }
 
+        /* Music Control */
+        .music-control {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .music-control:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .welcome-text h1, .headline {
@@ -723,8 +746,8 @@
                 top: 25%;
             }
             .calendar-container {
-                top: 40%;
                 padding: 20px;
+                max-width: 350px;
             }
             .calendar-day {
                 width: 35px;
@@ -760,6 +783,13 @@
                 padding: 12px 25px;
                 font-size: 1.1rem;
             }
+            .music-control {
+                top: 15px;
+                right: 15px;
+                width: 45px;
+                height: 45px;
+                font-size: 1.3rem;
+            }
             .popup-letter {
                 padding: 25px;
                 max-width: 350px;
@@ -793,6 +823,7 @@
             }
             .calendar-container {
                 padding: 15px;
+                max-width: 300px;
             }
             .calendar-day {
                 width: 30px;
@@ -804,6 +835,13 @@
                 right: 15px;
                 padding: 10px 20px;
                 font-size: 1rem;
+            }
+            .music-control {
+                top: 10px;
+                right: 10px;
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
             }
             .popup-letter {
                 padding: 20px;
@@ -825,9 +863,12 @@
 <body>
     <!-- Audio Player -->
     <audio class="audio-player" id="background-music" loop>
-        <source src="birthday-song.mp3" type="audio/mp3">
+        <source src="piano-music.mp3" type="audio/mp3">
         Таны хөтөч дуу тоглуулах боломжгүй байна.
     </audio>
+
+    <!-- Music Control -->
+    <button class="music-control" id="music-control">🎵</button>
 
     <!-- Floating Hearts Background -->
     <div class="floating-hearts" id="floating-hearts"></div>
@@ -837,12 +878,6 @@
 
     <!-- Birthday Stars - ЗӨВХӨН ЭХЛЭХ ХЭСЭГТ -->
     <div class="birthday-stars">🎂 2007.11.19 🎂</div>
-
-    <!-- Calendar -->
-    <div class="calendar-container">
-        <div class="calendar-title">2025 оны 11 сар</div>
-        <div class="calendar" id="calendar"></div>
-    </div>
 
     <!-- Emoji Images -->
     <div class="emoji-container" id="emoji-container"></div>
@@ -887,6 +922,12 @@
                 Та тоглоомыг амжилттай дуусгалаа! Миний хайрт Энхжинд зориулсан онцгой бэлэгт тавтай морил. 💝<br>
                 Энэ онцгой өдөр чинь зориулсан миний хайрын илэрхийлэл болон баяр хүргэлтийг хүлээн авна уу. ✨
             </p>
+
+            <!-- Calendar - Одоо баяр хүргэх хэсэгт байрлана -->
+            <div class="calendar-container">
+                <div class="calendar-title">2025 оны 11 сар - Чиний дараагийн төрсөн өдөр</div>
+                <div class="calendar" id="calendar"></div>
+            </div>
             
             <!-- Video Section -->
             <div class="video-section">
@@ -942,6 +983,7 @@
         const popupOverlay = document.getElementById('popup-overlay');
         const closeButton = document.getElementById('close-button');
         const backgroundMusic = document.getElementById('background-music');
+        const musicControl = document.getElementById('music-control');
         const calendar = document.getElementById('calendar');
         
         // Game Variables
@@ -951,6 +993,7 @@
         let matchedPairs = 0;
         const totalPairs = 8;
         let gameStarted = false;
+        let isMusicPlaying = true;
 
         // Create November 2025 Calendar
         function createCalendar() {
@@ -992,6 +1035,18 @@
                 
                 calendar.appendChild(dayElement);
             });
+        }
+
+        // Music control
+        function toggleMusic() {
+            if (isMusicPlaying) {
+                backgroundMusic.pause();
+                musicControl.textContent = '🔇';
+            } else {
+                backgroundMusic.play();
+                musicControl.textContent = '🎵';
+            }
+            isMusicPlaying = !isMusicPlaying;
         }
 
         // Smooth transition function
@@ -1255,6 +1310,8 @@
             }
         });
 
+        musicControl.addEventListener('click', toggleMusic);
+
         // Keyboard support for popup
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape' && popupOverlay.style.display === 'flex') {
@@ -1269,6 +1326,7 @@
         
         // Start background music automatically
         window.addEventListener('load', function() {
+            backgroundMusic.volume = 0.3; // Намуухан дуу
             backgroundMusic.play().catch(e => {
                 console.log('Дуу автоматаар эхлэхэд алдаа гарлаа:', e);
             });
