@@ -68,53 +68,6 @@
             }
         }
 
-        /* Name Constellation - ЗӨВХӨН ЭХЛЭХ ХЭСЭГТ */
-        .name-constellation {
-            position: absolute;
-            top: 20%;
-            left: 0;
-            width: 100%;
-            text-align: center;
-            font-family: 'Dancing Script', cursive;
-            font-size: 3.5rem;
-            color: #ffccff;
-            text-shadow: 0 0 20px rgba(255, 204, 255, 0.8);
-            z-index: 10;
-            animation: nameGlow 3s infinite alternate;
-        }
-
-        @keyframes nameGlow {
-            0% { 
-                text-shadow: 0 0 10px rgba(255, 204, 255, 0.7), 
-                           0 0 20px rgba(255, 153, 255, 0.5),
-                           0 0 30px rgba(255, 102, 178, 0.3); 
-            }
-            100% { 
-                text-shadow: 0 0 20px rgba(255, 204, 255, 0.9), 
-                           0 0 30px rgba(255, 153, 255, 0.7),
-                           0 0 40px rgba(255, 102, 178, 0.5),
-                           0 0 50px rgba(255, 51, 153, 0.3); 
-            }
-        }
-
-        /* Birthday Stars - ЗӨВХӨН ЭХЛЭХ ХЭСЭГТ */
-        .birthday-stars {
-            position: absolute;
-            top: 30%;
-            left: 0;
-            width: 100%;
-            text-align: center;
-            font-size: 2rem;
-            color: #ff9966;
-            z-index: 10;
-            animation: birthdayPulse 2s infinite;
-        }
-
-        @keyframes birthdayPulse {
-            0%, 100% { transform: scale(1); opacity: 0.8; }
-            50% { transform: scale(1.1); opacity: 1; }
-        }
-
         /* Calendar - Одоо баяр хүргэх хэсэгт байрлана */
         .calendar-container {
             background: rgba(255, 255, 255, 0.1);
@@ -737,14 +690,6 @@
             .celebration-title {
                 font-size: 3rem;
             }
-            .name-constellation {
-                font-size: 2.8rem;
-                top: 15%;
-            }
-            .birthday-stars {
-                font-size: 1.5rem;
-                top: 25%;
-            }
             .calendar-container {
                 padding: 20px;
                 max-width: 350px;
@@ -815,12 +760,6 @@
                 width: 70px;
                 height: 70px;
             }
-            .name-constellation {
-                font-size: 2.2rem;
-            }
-            .birthday-stars {
-                font-size: 1.2rem;
-            }
             .calendar-container {
                 padding: 15px;
                 max-width: 300px;
@@ -872,12 +811,6 @@
 
     <!-- Floating Hearts Background -->
     <div class="floating-hearts" id="floating-hearts"></div>
-
-    <!-- Name Constellation - ЗӨВХӨН ЭХЛЭХ ХЭСЭГТ -->
-    <div class="name-constellation">Энхжин ✨</div>
-
-    <!-- Birthday Stars - ЗӨВХӨН ЭХЛЭХ ХЭСЭГТ -->
-    <div class="birthday-stars">🎂 2007.11.14 🎂</div>
 
     <!-- Emoji Images -->
     <div class="emoji-container" id="emoji-container"></div>
