@@ -993,7 +993,10 @@
         let matchedPairs = 0;
         const totalPairs = 8;
         let gameStarted = false;
-        let isMusicPlaying = true;
+        let isMusicPlaying = false;
+
+        // Card symbols - ЭНЭ ДУТУУ БАЙСАН
+        const cardSymbols = ['❤️', '💖', '💕', '💗', '💓', '💞', '💘', '💝'];
 
         // Create November 2025 Calendar
         function createCalendar() {
@@ -1042,11 +1045,23 @@
             if (isMusicPlaying) {
                 backgroundMusic.pause();
                 musicControl.textContent = '🔇';
+                isMusicPlaying = false;
             } else {
-                backgroundMusic.play();
-                musicControl.textContent = '🎵';
+                backgroundMusic.play().then(() => {
+                    musicControl.textContent = '🎵';
+                    isMusicPlaying = true;
+                }).catch(e => {
+                    console.log('Дуу эхлүүлэхэд алдаа:', e);
+                    // Хэрэглэгч товч дарсны дараа дуу эхлүүлэх
+                    document.body.addEventListener('click', function startMusicOnClick() {
+                        backgroundMusic.play().then(() => {
+                            musicControl.textContent = '🎵';
+                            isMusicPlaying = true;
+                        });
+                        document.body.removeEventListener('click', startMusicOnClick);
+                    }, { once: true });
+                });
             }
-            isMusicPlaying = !isMusicPlaying;
         }
 
         // Smooth transition function
@@ -1102,6 +1117,9 @@
                 emoji.className = 'emoji';
                 emoji.src = src;
                 emoji.alt = `Emoji ${index + 1}`;
+                emoji.onerror = function() {
+                    this.style.display = 'none';
+                };
                 emojiContainer.appendChild(emoji);
             });
         }
@@ -1273,6 +1291,11 @@
             smoothTransition(landingSection, nightSkySection);
             createStars(starsContainer);
             createMemoryGame();
+            
+            // Дуу эхлүүлэх
+            if (!isMusicPlaying) {
+                toggleMusic();
+            }
         });
 
         startGameButton.addEventListener('click', function() {
@@ -1324,12 +1347,19 @@
         createEmojis();
         createCalendar();
         
-        // Start background music automatically
+        // Дууны тохиргоо
+        backgroundMusic.volume = 0.3;
+        backgroundMusic.preload = 'auto';
+        
+        // Дуу автоматаар эхлүүлэх
         window.addEventListener('load', function() {
-            backgroundMusic.volume = 0.3; // Намуухан дуу
-            backgroundMusic.play().catch(e => {
-                console.log('Дуу автоматаар эхлэхэд алдаа гарлаа:', e);
-            });
+            // Autoplay policy-д тохируулах
+            document.body.addEventListener('click', function initMusic() {
+                if (!isMusicPlaying) {
+                    toggleMusic();
+                }
+                document.body.removeEventListener('click', initMusic);
+            }, { once: true });
         });
     </script>
 </body>
