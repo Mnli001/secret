@@ -480,7 +480,7 @@
             display: none;
         }
 
-        /* Video Container */
+        /* Video Section */
         .video-section {
             width: 100%;
             max-width: 700px;
@@ -495,6 +495,7 @@
             overflow: hidden;
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
             margin-bottom: 20px;
+            display: none; /* Анхны үед нуух */
         }
 
         .video-player {
@@ -537,6 +538,27 @@
             border-bottom: 18px solid transparent;
             border-left: 30px solid white;
             margin-left: 8px;
+        }
+
+        /* Watch Video Button */
+        .watch-video-button {
+            background: linear-gradient(45deg, #ff4d6d, #ff8fa3);
+            border: none;
+            border-radius: 50px;
+            padding: 18px 45px;
+            font-size: 1.4rem;
+            color: white;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow: 0 5px 20px rgba(255, 77, 109, 0.5);
+            font-family: 'Playfair Display', serif;
+            margin: 20px auto;
+            display: block;
+        }
+
+        .watch-video-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 25px rgba(255, 77, 109, 0.7);
         }
 
         /* POPUP STYLE */
@@ -660,7 +682,7 @@
                 font-size: 1.1rem;
                 padding: 20px;
             }
-            .main-button, .special-gift-button {
+            .main-button, .special-gift-button, .watch-video-button {
                 padding: 15px 35px;
                 font-size: 1.2rem;
             }
@@ -810,7 +832,7 @@
             <h1 class="celebration-title">Баяр хүргэе! 🎉</h1>
             <p class="celebration-message">
                 Та тоглоомыг амжилттай дуусгалаа! Тоглоомоо амжилттай дуусгасан болохоор нэгэн онцгой бэлэгтэй кк. 💝<br>
-                Доор байгаа миний нэгэн жижигхээн бичлэгийг хүлээн авна уу. Бичлэг дуусмагц бас нэгэн товч гарж ирэх болно жүү ✨
+                Доор байгаа товчийг дарж миний нэгэн жижигхээн бичлэгийг үзээрэй. Бичлэг дуусмагц бас нэгэн товч гарж ирэх болно жүү ✨
             </p>
 
             <!-- Calendar -->
@@ -821,7 +843,9 @@
             
             <!-- Video Section -->
             <div class="video-section">
-                <div class="video-container">
+                <button class="watch-video-button" id="watch-video-button">🎬 Бичлэг үзэх</button>
+                
+                <div class="video-container" id="video-container">
                     <video class="video-player" id="birthday-video">
                         <source src="bichleg1.mp4" type="video/mp4">
                         Таны хөтөч видео тоглуулах боломжгүй байна.
@@ -868,6 +892,8 @@
         const giftButton = document.getElementById('gift-button');
         const video = document.getElementById('birthday-video');
         const playButton = document.getElementById('play-button');
+        const videoContainer = document.getElementById('video-container');
+        const watchVideoButton = document.getElementById('watch-video-button');
         const specialGiftButton = document.getElementById('special-gift-button');
         const popupOverlay = document.getElementById('popup-overlay');
         const closeButton = document.getElementById('close-button');
@@ -1164,6 +1190,12 @@
             }
         }
 
+        // Show video
+        function showVideo() {
+            videoContainer.style.display = 'block';
+            watchVideoButton.style.display = 'none';
+        }
+
         // Video ended - show special gift button
         video.addEventListener('ended', function() {
             specialGiftButton.style.display = 'block';
@@ -1207,6 +1239,10 @@
 
         giftButton.addEventListener('click', function() {
             showCelebration();
+        });
+
+        watchVideoButton.addEventListener('click', function() {
+            showVideo();
         });
 
         specialGiftButton.addEventListener('click', function() {
