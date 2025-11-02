@@ -863,7 +863,7 @@
 <body>
     <!-- Audio Player -->
     <audio class="audio-player" id="background-music" loop>
-        <source src="piano-music.mp3" type="audio/mp3">
+        <source src="music.mp3" type="audio/mp3">
         Таны хөтөч дуу тоглуулах боломжгүй байна.
     </audio>
 
@@ -877,7 +877,7 @@
     <div class="name-constellation">Энхжин ✨</div>
 
     <!-- Birthday Stars - ЗӨВХӨН ЭХЛЭХ ХЭСЭГТ -->
-    <div class="birthday-stars">🎂 2007.11.19 🎂</div>
+    <div class="birthday-stars">🎂 2007.11.14 🎂</div>
 
     <!-- Emoji Images -->
     <div class="emoji-container" id="emoji-container"></div>
@@ -925,7 +925,7 @@
 
             <!-- Calendar - Одоо баяр хүргэх хэсэгт байрлана -->
             <div class="calendar-container">
-                <div class="calendar-title">2025 оны 11 сар - Чиний дараагийн төрсөн өдөр</div>
+                <div class="calendar-title">2025 оны 11 сар</div>
                 <div class="calendar" id="calendar"></div>
             </div>
             
@@ -995,7 +995,7 @@
         let gameStarted = false;
         let isMusicPlaying = false;
 
-        // Card symbols - ЭНЭ ДУТУУ БАЙСАН
+        // Card symbols
         const cardSymbols = ['❤️', '💖', '💕', '💗', '💓', '💞', '💘', '💝'];
 
         // Create November 2025 Calendar
@@ -1032,7 +1032,7 @@
                 dayElement.className = 'calendar-day';
                 dayElement.textContent = day;
                 
-                if (day === 19) {
+                if (day === 14) {
                     dayElement.classList.add('birthday');
                 }
                 
@@ -1052,16 +1052,27 @@
                     isMusicPlaying = true;
                 }).catch(e => {
                     console.log('Дуу эхлүүлэхэд алдаа:', e);
-                    // Хэрэглэгч товч дарсны дараа дуу эхлүүлэх
-                    document.body.addEventListener('click', function startMusicOnClick() {
-                        backgroundMusic.play().then(() => {
-                            musicControl.textContent = '🎵';
-                            isMusicPlaying = true;
-                        });
-                        document.body.removeEventListener('click', startMusicOnClick);
-                    }, { once: true });
                 });
             }
+        }
+
+        // Дуу шууд эхлүүлэх
+        function startMusic() {
+            backgroundMusic.volume = 0.3;
+            backgroundMusic.play().then(() => {
+                musicControl.textContent = '🎵';
+                isMusicPlaying = true;
+            }).catch(e => {
+                console.log('Дуу автоматаар эхлүүлэхэд алдаа:', e);
+                // Хэрэглэгч товч дарсны дараа дуу эхлүүлэх
+                document.addEventListener('click', function startMusicOnClick() {
+                    backgroundMusic.play().then(() => {
+                        musicControl.textContent = '🎵';
+                        isMusicPlaying = true;
+                    });
+                    document.removeEventListener('click', startMusicOnClick);
+                }, { once: true });
+            });
         }
 
         // Smooth transition function
@@ -1291,11 +1302,6 @@
             smoothTransition(landingSection, nightSkySection);
             createStars(starsContainer);
             createMemoryGame();
-            
-            // Дуу эхлүүлэх
-            if (!isMusicPlaying) {
-                toggleMusic();
-            }
         });
 
         startGameButton.addEventListener('click', function() {
@@ -1347,20 +1353,8 @@
         createEmojis();
         createCalendar();
         
-        // Дууны тохиргоо
-        backgroundMusic.volume = 0.3;
-        backgroundMusic.preload = 'auto';
-        
-        // Дуу автоматаар эхлүүлэх
-        window.addEventListener('load', function() {
-            // Autoplay policy-д тохируулах
-            document.body.addEventListener('click', function initMusic() {
-                if (!isMusicPlaying) {
-                    toggleMusic();
-                }
-                document.body.removeEventListener('click', initMusic);
-            }, { once: true });
-        });
+        // Дуу шууд эхлүүлэх
+        window.addEventListener('load', startMusic);
     </script>
 </body>
 </html>
