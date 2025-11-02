@@ -883,11 +883,12 @@
         const totalPairs = 8;
         let gameStarted = false;
         let isMusicPlaying = false;
+        let videoStarted = false;
 
         // Card symbols
         const cardSymbols = ['❤️', '💖', '💕', '💗', '💓', '💞', '💘', '💝'];
 
-        // Create November 2025 Calendar - ШИНЭЧЛЭГДСЭН
+        // Create November 2025 Calendar
         function createCalendar() {
             const daysOfWeek = ['Да', 'Мя', 'Лх', 'Пү', 'Ба', 'Бя', 'Ня'];
             const november2025 = [
@@ -1133,6 +1134,9 @@
             createStars(celebrationStars);
             createConfetti();
             giftButton.style.display = 'none';
+            
+            // Дууны чангалалтыг 70% болгох
+            backgroundMusic.volume = 0.7;
         }
 
         // Create confetti
@@ -1170,6 +1174,10 @@
         playButton.addEventListener('click', function() {
             video.play();
             this.style.display = 'none';
+            videoStarted = true;
+            
+            // Дууны чангалалтыг 70% болгох
+            backgroundMusic.volume = 0.7;
         });
 
         // Event listeners
