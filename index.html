@@ -19,12 +19,6 @@
             overflow-x: hidden;
             line-height: 1.6;
             min-height: 100vh;
-            opacity: 1;
-            transition: opacity 0.8s ease;
-        }
-
-        body.fade-out {
-            opacity: 0;
         }
 
         /* Floating Hearts Background */
@@ -68,7 +62,7 @@
             }
         }
 
-        /* Calendar - Одоо баяр хүргэх хэсэгт байрлана */
+        /* Calendar */
         .calendar-container {
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(15px);
@@ -191,16 +185,10 @@
             padding: 40px 20px;
             position: relative;
             z-index: 2;
-            opacity: 1;
-            transition: opacity 0.8s ease;
         }
 
-        section.hidden {
+        .hidden {
             display: none !important;
-        }
-
-        section.fade-out {
-            opacity: 0;
         }
 
         /* Landing Section */
@@ -420,7 +408,7 @@
             cursor: default;
         }
 
-        /* Gift Button - Тоглоом дуусахад гарна */
+        /* Gift Button */
         .gift-button {
             position: fixed;
             bottom: 30px;
@@ -490,18 +478,6 @@
             font-family: 'Playfair Display', serif;
             margin-top: 30px;
             display: none;
-            animation: fadeInUp 0.5s ease 0.2s both;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
 
         /* Video Container */
@@ -575,12 +551,6 @@
             justify-content: center;
             align-items: center;
             z-index: 1000;
-            animation: fadeIn 0.3s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
         }
 
         .popup-letter {
@@ -592,20 +562,8 @@
             max-height: 80vh;
             overflow-y: auto;
             position: relative;
-            animation: slideUp 0.4s ease;
             border: 2px solid #ff8fa3;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        }
-
-        @keyframes slideUp {
-            from { 
-                transform: translateY(30px) scale(0.9);
-                opacity: 0;
-            }
-            to { 
-                transform: translateY(0) scale(1);
-                opacity: 1;
-            }
         }
 
         .letter-content {
@@ -632,7 +590,6 @@
             justify-content: center;
             align-items: center;
             transition: all 0.3s ease;
-            z-index: 1001;
         }
 
         .close-button:hover {
@@ -856,7 +813,7 @@
                 Доор байгаа миний нэгэн жижигхээн бичлэгийг хүлээн авна уу. Бичлэг дуусмагц бас нэгэн товч гарж ирэх болно жүү ✨
             </p>
 
-            <!-- Calendar - Одоо баяр хүргэх хэсэгт байрлана -->
+            <!-- Calendar -->
             <div class="calendar-container">
                 <div class="calendar-title">2025 оны 11 сарын 19</div>
                 <div class="calendar" id="calendar"></div>
@@ -872,7 +829,6 @@
                     <div class="play-button" id="play-button"></div>
                 </div>
                 
-                <!-- "Онцгой бэлэг" товч видеоны дэргэд байрлана -->
                 <button class="special-gift-button" id="special-gift-button">💌 Онцгой бэлэг</button>
             </div>
         </div>
@@ -931,7 +887,7 @@
         // Card symbols
         const cardSymbols = ['❤️', '💖', '💕', '💗', '💓', '💞', '💘', '💝'];
 
-        // Create November 2025 Calendar
+        // Create November 2025 Calendar - ШИНЭЧЛЭГДСЭН
         function createCalendar() {
             const daysOfWeek = ['Да', 'Мя', 'Лх', 'Пү', 'Ба', 'Бя', 'Ня'];
             const november2025 = [
@@ -959,7 +915,7 @@
                 calendar.appendChild(emptyDay);
             }
 
-            // Calendar days
+            // Calendar days - 19-ний өдөр дээр зүрх
             november2025.forEach(day => {
                 const dayElement = document.createElement('div');
                 dayElement.className = 'calendar-day';
@@ -997,7 +953,6 @@
                 isMusicPlaying = true;
             }).catch(e => {
                 console.log('Дуу автоматаар эхлүүлэхэд алдаа:', e);
-                // Хэрэглэгч товч дарсны дараа дуу эхлүүлэх
                 document.addEventListener('click', function startMusicOnClick() {
                     backgroundMusic.play().then(() => {
                         musicControl.textContent = '🎵';
@@ -1006,20 +961,6 @@
                     document.removeEventListener('click', startMusicOnClick);
                 }, { once: true });
             });
-        }
-
-        // Smooth transition function
-        function smoothTransition(currentSection, nextSection) {
-            currentSection.classList.add('fade-out');
-            setTimeout(() => {
-                currentSection.classList.add('hidden');
-                currentSection.classList.remove('fade-out');
-                nextSection.classList.remove('hidden');
-                nextSection.style.opacity = '0';
-                setTimeout(() => {
-                    nextSection.style.opacity = '1';
-                }, 50);
-            }, 800);
         }
 
         // Create floating hearts
@@ -1187,7 +1128,8 @@
 
         // Show celebration
         function showCelebration() {
-            smoothTransition(nightSkySection, celebrationSection);
+            nightSkySection.classList.add('hidden');
+            celebrationSection.classList.remove('hidden');
             createStars(celebrationStars);
             createConfetti();
             giftButton.style.display = 'none';
@@ -1232,7 +1174,8 @@
 
         // Event listeners
         mainButton.addEventListener('click', function() {
-            smoothTransition(landingSection, nightSkySection);
+            landingSection.classList.add('hidden');
+            nightSkySection.classList.remove('hidden');
             createStars(starsContainer);
             createMemoryGame();
         });
